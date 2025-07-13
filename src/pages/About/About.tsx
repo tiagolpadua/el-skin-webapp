@@ -1,5 +1,6 @@
 import React from 'react';
 import './About.css';
+import About1 from '../../assets/about1.png';
 
 const About: React.FC = () => {
   return (
@@ -41,16 +42,8 @@ const About: React.FC = () => {
         <div className="about-images-section">
           <div className="product-image-container">
             <img 
-              src="/api/placeholder/300/400" 
+              src={About1} 
               alt="Produto AL SKIN sendo aplicado"
-              className="product-image"
-            />
-          </div>
-          
-          <div className="product-image-container">
-            <img 
-              src="/api/placeholder/300/400" 
-              alt="Processo de fabricação AL SKIN"
               className="product-image"
             />
           </div>

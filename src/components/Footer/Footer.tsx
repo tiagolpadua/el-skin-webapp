@@ -1,17 +1,16 @@
 import { IconDefinition } from '@fortawesome/fontawesome-svg-core';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { 
-  faInstagram, 
-  faFacebook, 
-  faYoutube, 
-  faPinterest, 
-  faTwitter, 
-  faLinkedin 
+import {
+  faFacebook,
+  faInstagram,
+  faLinkedin,
+  faPinterest,
+  faTwitter,
+  faYoutube
 } from '@fortawesome/free-brands-svg-icons';
 import { faGlobe } from '@fortawesome/free-solid-svg-icons';
-import './Footer.css';
-import About from '../../pages/About/About';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { Link } from 'react-router-dom';
+import './Footer.css';
 
 interface FooterLink {
   label: string;
@@ -102,11 +101,6 @@ const Footer: React.FC = () => {
 
   const handleSocialClick = (socialLink: SocialLink) => {
     console.log(`Abrindo ${socialLink.label}: ${socialLink.href}`);
-  };
-
-  const handleLinkClick = (link: FooterLink) => {
-    console.log(`Navegando para: ${link.href}`);
-    // Handle navigation
   };
 
   return (
