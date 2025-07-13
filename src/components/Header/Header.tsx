@@ -2,6 +2,7 @@ import { faCartShopping, faSearch } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import React, { useState } from 'react';
 import './Header.css';
+import { Link } from 'react-router-dom';
 
 function Header() {
   const [texto, setTexto] = useState('');
@@ -20,9 +21,11 @@ function Header() {
     <header className="header">
       <div className="header-top">
         <div className="container">
-          <div className="logo">
-            <span>AL SKIN</span>
-          </div>  
+          <Link className="footer-link" to={'/'}>
+            <div className="logo">
+              <span>AL SKIN</span>
+            </div>  
+          </Link> 
           
           <div className="search-bar">
             <input 
