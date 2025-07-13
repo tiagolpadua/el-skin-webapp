@@ -1,5 +1,5 @@
 /* carouselSection.css */
-.carousel-section {
+.carouselSection {
   position: relative;
   min-height: 500px;
   display: flex;
@@ -12,7 +12,7 @@
   overflow: hidden;
 }
 
-.carousel-section::before {
+.carouselSection::before {
   content: '';
   position: absolute;
   top: 0;
@@ -23,7 +23,7 @@
   pointer-events: none;
 }
 
-.carousel-container {
+.carouselContainer {
   width: 100%;
   max-width: 1200px;
   margin: 0 auto;
@@ -32,14 +32,14 @@
   z-index: 2;
 }
 
-.carousel-content {
+.carouselContent {
   display: flex;
   align-items: center;
   gap: 20px;
-  max-width: 600px;
+  max-width: 1000px;
 }
 
-.carousel-back-button {
+.carouselNavButton {
   background: rgba(255, 255, 255, 0.2);
   border: 1px solid rgba(255, 255, 255, 0.3);
   width: 48px;
@@ -53,16 +53,16 @@
   backdrop-filter: blur(10px);
 }
 
-.carousel-back-button:hover {
+.carouselNavButton:hover {
   background: rgba(255, 255, 255, 0.3);
   transform: translateX(-2px);
 }
 
-.carousel-text {
+.carouselText {
   flex: 1;
 }
 
-.carousel-subtitle {
+.carouselSubtitle {
   display: block;
   font-size: 16px;
   color: #8B4A8B;
@@ -71,7 +71,7 @@
   letter-spacing: 0.5px;
 }
 
-.carousel-title {
+.carouselTitle {
   font-size: 64px;
   font-weight: 700;
   color: #8B4A8B;
@@ -81,7 +81,7 @@
   text-shadow: 2px 2px 4px rgba(139, 74, 139, 0.1);
 }
 
-.carousel-description {
+.carouselDescription {
   font-size: 18px;
   color: #666;
   margin-bottom: 32px;
@@ -89,7 +89,7 @@
   max-width: 400px;
 }
 
-.carousel-cta-button {
+.carouselCtaButton {
   background: linear-gradient(135deg, #8B4A8B 0%, #A855A8 100%);
   color: white;
   border: none;
@@ -106,13 +106,13 @@
   text-transform: lowercase;
 }
 
-.carousel-cta-button:hover {
+.carouselCtaButton:hover {
   background: linear-gradient(135deg, #7A3E7A 0%, #9333EA 100%);
   transform: translateY(-2px);
   box-shadow: 0 8px 24px rgba(139, 74, 139, 0.4);
 }
 
-.carousel-cta-button:active {
+.carouselCtaButton:active {
   transform: translateY(0);
 }
 
@@ -128,27 +128,27 @@
   }
 }
 
-.carousel-text > * {
+.carouselText > * {
   animation: fadeInUp 0.6s ease-out forwards;
 }
 
-.carousel-text .carousel-subtitle {
+.carouselText .carouselSubtitle {
   animation-delay: 0.1s;
 }
 
-.carousel-text .carousel-title {
+.carouselText .carouselTitle {
   animation-delay: 0.2s;
 }
 
-.carousel-text .carousel-description {
+.carouselText .carouselDescription {
   animation-delay: 0.3s;
 }
 
-.carousel-text .carousel-cta-button {
+.carouselText .carouselCtaButton {
   animation-delay: 0.4s;
 }
 
-.carousel-content .carousel-back-button {
+.carouselContent .carouselBackButton {
   animation: fadeInUp 0.6s ease-out forwards;
   animation-delay: 0.05s;
 }
