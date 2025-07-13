@@ -1,26 +1,10 @@
-import React, { useEffect, useState } from 'react';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import './Header.css';
 import { faCartShopping, faSearch } from '@fortawesome/free-solid-svg-icons';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import React, { useState } from 'react';
+import './Header.css';
 
 function Header() {
-  // let texto = '555';
-  // https://react.dev/reference/react/useState
-
   const [texto, setTexto] = useState('');
-
-  const [contador, setContador] = useState(0);
-
-  const [hora, setHora] = useState(new Date());
-
-  useEffect(() => {
-    const timer = setInterval(() => {
-      setHora(new Date());
-    }, 1000);
-
-    // Cleanup na desmontagem do componente
-    return () => clearInterval(timer);
-  }, []);
 
   function handleOnChangeBuscador(e: React.ChangeEvent<HTMLInputElement>) {
     const valor = e.target.value;
@@ -29,17 +13,7 @@ function Header() {
   }
 
   function handleOnClickCart() {
-    setContador(contador + 1);
-    setContador(contador + 1);
-    setContador(contador + 1);
-    setContador(contador + 1);
-    setContador(c => c + 1);
-    setContador(c => c + 1);
-    setContador(c => c + 1);
-    setContador(c => c + 1);
-    setContador(c => c + 1);
-    setContador(c => c + 1);
-    console.log('Contador de carrinho:', contador + 1);
+    console.log('click no carrinho');
   }
 
   return (
@@ -56,10 +30,6 @@ function Header() {
               placeholder="O que você está procurando?"
               className="search-input"
               onChange={handleOnChangeBuscador}
-              // onChange={(e) => {
-              //   setTexto(e.target.value);
-              //   console.log('Valor buscado:', texto);
-              // }}
             />
             <button className="search-button">
               <FontAwesomeIcon icon={faSearch} />
@@ -87,16 +57,6 @@ function Header() {
           </div>
         </div>
       </nav>
-
-      {/* <div className="center-text">
-        Valor buscado: {texto}
-      </div>
-      <div className="center-text">
-        Valor Contador: {contador}
-      </div>
-      <div className="center-text">
-        Hora atual: {hora.toLocaleTimeString()}
-      </div> */}
     </header>
   );
 }

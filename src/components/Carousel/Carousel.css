@@ -1,5 +1,5 @@
-/* HeroSection.css */
-.hero-section {
+/* carouselSection.css */
+.carousel-section {
   position: relative;
   min-height: 500px;
   display: flex;
@@ -12,7 +12,7 @@
   overflow: hidden;
 }
 
-.hero-section::before {
+.carousel-section::before {
   content: '';
   position: absolute;
   top: 0;
@@ -23,7 +23,7 @@
   pointer-events: none;
 }
 
-.hero-container {
+.carousel-container {
   width: 100%;
   max-width: 1200px;
   margin: 0 auto;
@@ -32,14 +32,14 @@
   z-index: 2;
 }
 
-.hero-content {
+.carousel-content {
   display: flex;
   align-items: center;
   gap: 20px;
   max-width: 600px;
 }
 
-.hero-back-button {
+.carousel-back-button {
   background: rgba(255, 255, 255, 0.2);
   border: 1px solid rgba(255, 255, 255, 0.3);
   width: 48px;
@@ -53,16 +53,16 @@
   backdrop-filter: blur(10px);
 }
 
-.hero-back-button:hover {
+.carousel-back-button:hover {
   background: rgba(255, 255, 255, 0.3);
   transform: translateX(-2px);
 }
 
-.hero-text {
+.carousel-text {
   flex: 1;
 }
 
-.hero-subtitle {
+.carousel-subtitle {
   display: block;
   font-size: 16px;
   color: #8B4A8B;
@@ -71,7 +71,7 @@
   letter-spacing: 0.5px;
 }
 
-.hero-title {
+.carousel-title {
   font-size: 64px;
   font-weight: 700;
   color: #8B4A8B;
@@ -81,7 +81,7 @@
   text-shadow: 2px 2px 4px rgba(139, 74, 139, 0.1);
 }
 
-.hero-description {
+.carousel-description {
   font-size: 18px;
   color: #666;
   margin-bottom: 32px;
@@ -89,7 +89,7 @@
   max-width: 400px;
 }
 
-.hero-cta-button {
+.carousel-cta-button {
   background: linear-gradient(135deg, #8B4A8B 0%, #A855A8 100%);
   color: white;
   border: none;
@@ -106,13 +106,13 @@
   text-transform: lowercase;
 }
 
-.hero-cta-button:hover {
+.carousel-cta-button:hover {
   background: linear-gradient(135deg, #7A3E7A 0%, #9333EA 100%);
   transform: translateY(-2px);
   box-shadow: 0 8px 24px rgba(139, 74, 139, 0.4);
 }
 
-.hero-cta-button:active {
+.carousel-cta-button:active {
   transform: translateY(0);
 }
 
@@ -128,27 +128,27 @@
   }
 }
 
-.hero-text > * {
+.carousel-text > * {
   animation: fadeInUp 0.6s ease-out forwards;
 }
 
-.hero-text .hero-subtitle {
+.carousel-text .carousel-subtitle {
   animation-delay: 0.1s;
 }
 
-.hero-text .hero-title {
+.carousel-text .carousel-title {
   animation-delay: 0.2s;
 }
 
-.hero-text .hero-description {
+.carousel-text .carousel-description {
   animation-delay: 0.3s;
 }
 
-.hero-text .hero-cta-button {
+.carousel-text .carousel-cta-button {
   animation-delay: 0.4s;
 }
 
-.hero-content .hero-back-button {
+.carousel-content .carousel-back-button {
   animation: fadeInUp 0.6s ease-out forwards;
   animation-delay: 0.05s;
 }
