@@ -1,7 +1,14 @@
 import React from 'react';
 import './ProductGrid.css';
 import ProductCard, { IProduct } from '../ProductCard/ProductCard';
-import ProductImg from '../../assets/product.png';
+import Prod1 from '../../assets/prod1.jpg';
+import Prod2 from '../../assets/prod2.jpg';
+import Prod3 from '../../assets/prod3.jpg';
+import Prod4 from '../../assets/prod4.jpg';
+import Prod5 from '../../assets/prod5.jpg';
+import Prod6 from '../../assets/prod6.jpg';
+import Prod7 from '../../assets/prod7.jpg';
+import Prod8 from '../../assets/prod8.jpg';
 
 const defaultProducts: IProduct[] = [
   {
@@ -9,7 +16,7 @@ const defaultProducts: IProduct[] = [
     name: 'Protetor solar AL SUN',
     description: 'alta proteção e pele luminosa sem grude nem pelo encarnado',
     price: 79.90,
-    image: ProductImg,
+    image: Prod1,
     tags: [
       { label: 'proteção', type: 'protection' },
       { label: 'rosto', type: 'face' }
@@ -20,7 +27,7 @@ const defaultProducts: IProduct[] = [
     name: 'Protetor solar AL SUN',
     description: 'alta proteção e pele luminosa sem grude nem pelo encarnado',
     price: 79.90,
-    image: ProductImg,
+    image: Prod2,
     tags: [
       { label: 'proteção', type: 'protection' },
       { label: 'rosto', type: 'face' }
@@ -31,7 +38,7 @@ const defaultProducts: IProduct[] = [
     name: 'Protetor solar AL SUN',
     description: 'alta proteção e pele luminosa sem grude nem pelo encarnado',
     price: 79.90,
-    image: ProductImg,
+    image: Prod3,
     tags: [
       { label: 'proteção', type: 'protection' },
       { label: 'rosto', type: 'face' }
@@ -42,7 +49,7 @@ const defaultProducts: IProduct[] = [
     name: 'Protetor solar AL SUN',
     description: 'alta proteção e pele luminosa sem grude nem pelo encarnado',
     price: 79.90,
-    image: ProductImg,
+    image: Prod4,
     tags: [
       { label: 'proteção', type: 'protection' },
       { label: 'rosto', type: 'face' }
@@ -53,7 +60,7 @@ const defaultProducts: IProduct[] = [
     name: 'Protetor solar AL SUN',
     description: 'alta proteção e pele luminosa sem grude nem pelo encarnado',
     price: 79.90,
-    image: ProductImg,
+    image: Prod5,
     tags: [
       { label: 'proteção', type: 'protection' },
       { label: 'rosto', type: 'face' }
@@ -64,7 +71,7 @@ const defaultProducts: IProduct[] = [
     name: 'Protetor solar AL SUN',
     description: 'alta proteção e pele luminosa sem grude nem pelo encarnado',
     price: 79.90,
-    image: ProductImg,
+    image: Prod8,
     tags: [
       { label: 'proteção', type: 'protection' },
       { label: 'rosto', type: 'face' }
@@ -75,7 +82,7 @@ const defaultProducts: IProduct[] = [
     name: 'Protetor solar AL SUN',
     description: 'alta proteção e pele luminosa sem grude nem pelo encarnado',
     price: 79.90,
-    image: ProductImg,
+    image: Prod6,
     tags: [
       { label: 'proteção', type: 'protection' },
       { label: 'rosto', type: 'face' }
@@ -86,7 +93,7 @@ const defaultProducts: IProduct[] = [
     name: 'Protetor solar AL SUN',
     description: 'alta proteção e pele luminosa sem grude nem pelo encarnado',
     price: 79.90,
-    image: ProductImg,
+    image: Prod7,
     tags: [
       { label: 'proteção', type: 'protection' },
       { label: 'rosto', type: 'face' }
