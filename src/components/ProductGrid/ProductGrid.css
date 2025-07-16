@@ -46,3 +46,54 @@
 .product-grid > *:nth-child(7) { animation: fadeInUp 0.5s ease-out 0.7s forwards; }
 .product-grid > *:nth-child(8) { animation: fadeInUp 0.5s ease-out 0.8s forwards; }
 
+/* Search info styles */
+.search-info {
+  margin-bottom: 30px;
+  text-align: center;
+}
+
+.search-info p {
+  color: #666;
+  font-size: 16px;
+  margin: 0;
+  padding: 10px 20px;
+  background-color: #f8f9fa;
+  border-radius: 8px;
+  border-left: 4px solid #8b5cf6;
+}
+
+.search-info strong {
+  color: #333;
+}
+
+/* No products found styles */
+.no-products-found {
+  grid-column: 1 / -1;
+  text-align: center;
+  padding: 60px 20px;
+  color: #666;
+}
+
+.no-products-found p {
+  font-size: 18px;
+  padding: 20px;
+  background-color: #f8f9fa;
+  border-radius: 12px;
+  border: 2px dashed #ddd;
+  max-width: 500px;
+  margin: 0 auto;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .search-info p {
+    font-size: 14px;
+    padding: 8px 16px;
+  }
+  
+  .no-products-found p {
+    font-size: 16px;
+    padding: 16px;
+  }
+}
+

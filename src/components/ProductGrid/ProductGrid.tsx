@@ -1,109 +1,43 @@
-import React from 'react';
+import React, { useEffect, useMemo } from 'react';
 import './ProductGrid.css';
-import ProductCard, { IProduct } from '../ProductCard/ProductCard';
-import Prod1 from '../../assets/prod1.jpg';
-import Prod2 from '../../assets/prod2.jpg';
-import Prod3 from '../../assets/prod3.jpg';
-import Prod4 from '../../assets/prod4.jpg';
-import Prod5 from '../../assets/prod5.jpg';
-import Prod6 from '../../assets/prod6.jpg';
-import Prod7 from '../../assets/prod7.jpg';
-import Prod8 from '../../assets/prod8.jpg';
-
-const defaultProducts: IProduct[] = [
-  {
-    id: '1',
-    name: 'Protetor solar AL SUN',
-    description: 'alta proteção e pele luminosa sem grude nem pelo encarnado',
-    price: 79.90,
-    image: Prod1,
-    tags: [
-      { label: 'proteção', type: 'protection' },
-      { label: 'rosto', type: 'face' }
-    ]
-  },
-  {
-    id: '2',
-    name: 'Protetor solar AL SUN',
-    description: 'alta proteção e pele luminosa sem grude nem pelo encarnado',
-    price: 79.90,
-    image: Prod2,
-    tags: [
-      { label: 'proteção', type: 'protection' },
-      { label: 'rosto', type: 'face' }
-    ]
-  },
-  {
-    id: '3',
-    name: 'Protetor solar AL SUN',
-    description: 'alta proteção e pele luminosa sem grude nem pelo encarnado',
-    price: 79.90,
-    image: Prod3,
-    tags: [
-      { label: 'proteção', type: 'protection' },
-      { label: 'rosto', type: 'face' }
-    ]
-  },
-  {
-    id: '4',
-    name: 'Protetor solar AL SUN',
-    description: 'alta proteção e pele luminosa sem grude nem pelo encarnado',
-    price: 79.90,
-    image: Prod4,
-    tags: [
-      { label: 'proteção', type: 'protection' },
-      { label: 'rosto', type: 'face' }
-    ]
-  },
-  {
-    id: '5',
-    name: 'Protetor solar AL SUN',
-    description: 'alta proteção e pele luminosa sem grude nem pelo encarnado',
-    price: 79.90,
-    image: Prod5,
-    tags: [
-      { label: 'proteção', type: 'protection' },
-      { label: 'rosto', type: 'face' }
-    ]
-  },
-  {
-    id: '6',
-    name: 'Protetor solar AL SUN',
-    description: 'alta proteção e pele luminosa sem grude nem pelo encarnado',
-    price: 79.90,
-    image: Prod8,
-    tags: [
-      { label: 'proteção', type: 'protection' },
-      { label: 'rosto', type: 'face' }
-    ]
-  },
-  {
-    id: '7',
-    name: 'Protetor solar AL SUN',
-    description: 'alta proteção e pele luminosa sem grude nem pelo encarnado',
-    price: 79.90,
-    image: Prod6,
-    tags: [
-      { label: 'proteção', type: 'protection' },
-      { label: 'rosto', type: 'face' }
-    ]
-  },
-  {
-    id: '8',
-    name: 'Protetor solar AL SUN',
-    description: 'alta proteção e pele luminosa sem grude nem pelo encarnado',
-    price: 79.90,
-    image: Prod7,
-    tags: [
-      { label: 'proteção', type: 'protection' },
-      { label: 'rosto', type: 'face' }
-    ]
-  }
-];
+import ProductCard from '../ProductCard/ProductCard';
+import { productService, IProduct } from '../../services';
+import { useCartContext } from '../../context/CartContext';
+import { useSearch } from '../../context/SearchContext';
 
 function ProductGrid() {
   const title = 'nossos queridinhos estão aqui';
-  const products = defaultProducts;
+  // const products = defaultProducts;
+
+  const [products, setProducts] = React.useState<IProduct[]>([]);
+  const { addItem } = useCartContext();
+  const { searchTerm } = useSearch();
+
+  // Filtrar produtos baseado no termo de busca
+  const filteredProducts = useMemo(() => {
+    if (!searchTerm.trim()) {
+      return products;
+    }
+    
+    return products.filter(product => 
+      product.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
+      product.description.toLowerCase().includes(searchTerm.toLowerCase())
+    );
+  }, [products, searchTerm]);  
+
+  useEffect(() => {
+    const fetchProducts = async () => {
+      try {
+        const products = await productService.getProducts();
+        setProducts(products);
+      } catch (error) {
+        console.error('Erro ao carregar produtos:', error);
+        // Aqui você pode implementar um estado de erro ou fallback
+      }
+    };
+
+    fetchProducts();
+  }, []);
 
   const handleProductClick = (productId: string) => {
     console.log(`Produto clicado: ${productId}`);
@@ -111,7 +45,17 @@ function ProductGrid() {
 
   const handleBuyClick = (productId: string, event: React.MouseEvent) => {
     event.stopPropagation();
-    console.log(`Comprar produto: ${productId}`);
+    
+    const product = products.find(p => p.id === productId);
+    if (product) {
+      addItem({
+        id: product.id,
+        name: product.name,
+        price: product.price,
+        image: product.image
+      });
+      console.log(`Produto adicionado ao carrinho: ${productId}`);
+    }
   };
 
   return (
@@ -119,15 +63,31 @@ function ProductGrid() {
       <div className="product-grid-container">
         <h2 className="product-grid-title">{title}</h2>
         
+        {searchTerm && (
+          <div className="search-info">
+            <p>Resultados para: &ldquo;<strong>{searchTerm}</strong>&rdquo; ({filteredProducts.length} produto{filteredProducts.length !== 1 ? 's' : ''} encontrado{filteredProducts.length !== 1 ? 's' : ''})</p>
+          </div>
+        )}
+        
         <div className="product-grid">
-          {products.map((product) => (
-            <ProductCard
-              key={product.id}
-              product={product}
-              onProductClick={handleProductClick}
-              onBuyClick={handleBuyClick}
-            />
-          ))}
+          {filteredProducts.length > 0 ? (
+            filteredProducts.map((product) => (
+              <ProductCard
+                key={product.id}
+                product={product}
+                onProductClick={handleProductClick}
+                onBuyClick={handleBuyClick}
+              />
+            ))
+          ) : (
+            <div className="no-products-found">
+              {searchTerm ? (
+                <p>Nenhum produto encontrado para &ldquo;{searchTerm}&rdquo;. Tente buscar por outro termo.</p>
+              ) : (
+                <p>Nenhum produto disponível no momento.</p>
+              )}
+            </div>
+          )}
         </div>
       </div>
     </section>

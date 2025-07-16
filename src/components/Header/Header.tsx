@@ -1,21 +1,41 @@
-import { faCartShopping, faSearch } from '@fortawesome/free-solid-svg-icons';
+import { faCartShopping, faSearch, faTimes } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import React, { useState } from 'react';
 import './Header.css';
 import { Link } from 'react-router-dom';
+import CartModal from '../CartModal/CartModal';
+import { useCartContext } from '../../context/CartContext';
+import { useSearch } from '../../context/SearchContext';
 
 function Header() {
-  const [texto, setTexto] = useState('');
+  const [isCartModalOpen, setIsCartModalOpen] = useState(false);
+  
+  const { items, updateQuantity, removeItem, getTotalItems } = useCartContext();
+  const { searchTerm, setSearchTerm } = useSearch();
 
   function handleOnChangeBuscador(e: React.ChangeEvent<HTMLInputElement>) {
     const valor = e.target.value;
-    setTexto(valor);
+    setSearchTerm(valor);
     console.log('Valor buscado:', valor);
   }
 
+  const handleClearSearch = () => {
+    setSearchTerm('');
+  };
+
   function handleOnClickCart() {
-    console.log('click no carrinho');
+    setIsCartModalOpen(true);
   }
+
+  const handleCloseCart = () => {
+    setIsCartModalOpen(false);
+  };
+
+  const handleFinalizePurchase = () => {
+    console.log('Finalizando compra...');
+    // Aqui você implementaria a lógica de checkout
+    setIsCartModalOpen(false);
+  };
 
   return (
     <header className="header">
@@ -32,16 +52,30 @@ function Header() {
               type="text" 
               placeholder="O que você está procurando?"
               className="search-input"
+              value={searchTerm}
               onChange={handleOnChangeBuscador}
             />
-            <button className="search-button">
+            <button className="search-button" type="button">
               <FontAwesomeIcon icon={faSearch} />
             </button>
+            {searchTerm && (
+              <button 
+                className="clear-search-button" 
+                onClick={handleClearSearch}
+                type="button"
+                title="Limpar pesquisa"
+              >
+                <FontAwesomeIcon icon={faTimes} />
+              </button>
+            )}
           </div>
           
           <div className="header-actions">
             <button className="cart-button" onClick={handleOnClickCart}>
               <FontAwesomeIcon icon={faCartShopping} />
+              {getTotalItems() > 0 && (
+                <span className="cart-badge">{getTotalItems()}</span>
+              )}
             </button>
           </div>
         </div>
@@ -60,6 +94,16 @@ function Header() {
           </div>
         </div>
       </nav>
+      
+      {/* Modal do Carrinho */}
+      <CartModal
+        isOpen={isCartModalOpen}
+        onClose={handleCloseCart}
+        items={items}
+        onUpdateQuantity={updateQuantity}
+        onRemoveItem={removeItem}
+        onFinalizePurchase={handleFinalizePurchase}
+      />
     </header>
   );
 }
