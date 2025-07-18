@@ -5,13 +5,13 @@ import './Header.css';
 import { Link } from 'react-router-dom';
 import CartModal from '../CartModal/CartModal';
 import { useCartContext } from '../../context/CartContext';
-import { useSearch } from '../../context/SearchContext';
+import { useSearchContext } from '../../context/SearchContext';
 
 function Header() {
   const [isCartModalOpen, setIsCartModalOpen] = useState(false);
   
   const { items, updateQuantity, removeItem, getTotalItems } = useCartContext();
-  const { searchTerm, setSearchTerm } = useSearch();
+  const { searchTerm, setSearchTerm } = useSearchContext();
 
   function handleOnChangeBuscador(e: React.ChangeEvent<HTMLInputElement>) {
     const valor = e.target.value;

@@ -26,7 +26,7 @@ export const SearchProvider: React.FC<SearchProviderProps> = ({ children }) => {
   );
 };
 
-export const useSearch = (): SearchContextType => {
+export const useSearchContext = (): SearchContextType => {
   const context = useContext(SearchContext);
   if (!context) {
     throw new Error('useSearch must be used within a SearchProvider');

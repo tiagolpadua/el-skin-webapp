@@ -3,7 +3,7 @@ import './ProductGrid.css';
 import ProductCard from '../ProductCard/ProductCard';
 import { productService, IProduct } from '../../services';
 import { useCartContext } from '../../context/CartContext';
-import { useSearch } from '../../context/SearchContext';
+import { useSearchContext } from '../../context/SearchContext';
 
 function ProductGrid() {
   const title = 'nossos queridinhos estão aqui';
@@ -11,7 +11,7 @@ function ProductGrid() {
 
   const [products, setProducts] = React.useState<IProduct[]>([]);
   const { addItem } = useCartContext();
-  const { searchTerm } = useSearch();
+  const { searchTerm } = useSearchContext();
 
   // Filtrar produtos baseado no termo de busca
   const filteredProducts = useMemo(() => {
