@@ -3,8 +3,6 @@ import { faAngleLeft, faAngleRight } from '@fortawesome/free-solid-svg-icons';
 import styles from './Carousel.module.css';
 import { useEffect, useState } from 'react';
 import { carouselService } from '../../service/carouselService';
-// import api from '../../service/api';
-// import axios from 'axios';
 
 interface ICarouselItem {
   subtitle: string;
@@ -28,8 +26,12 @@ function Carousel() {
   }, []);
 
   useEffect(() => {
+    console.log('iniciou o timer do carrousel');
     const timer = setInterval(() => nextItem(), 3000);
-    return () => clearInterval(timer);
+    return () => {
+      clearInterval(timer);
+      console.log('limpou o timer do carrousel');
+    };
   }, [items]);
 
   function previousItem() {

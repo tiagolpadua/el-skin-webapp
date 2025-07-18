@@ -5,7 +5,7 @@ function Home() {
   return (
     <>
       <Carousel/>
-      <ProductGrid/>
+      <ProductGrid />
 Ø    </>
   );
 }
