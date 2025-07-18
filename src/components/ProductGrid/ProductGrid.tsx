@@ -9,6 +9,8 @@ import Prod7 from '../../assets/prod7.jpg';
 import Prod8 from '../../assets/prod8.jpg';
 import './ProductGrid.css';
 import ProductCard, { IProduct } from '../ProductCard/ProductCard';
+import { useContext } from 'react';
+import { BuscaContext } from '../../App';
 
 const defaultProducts: IProduct[] = [
   {
@@ -104,6 +106,7 @@ const defaultProducts: IProduct[] = [
 function ProductGrid() {
   const title = 'nossos queridinhos estão aqui';
   const products = defaultProducts;
+  const termoBusca = useContext(BuscaContext);
 
   const handleProductClick = (productId: string) => {
     console.log(`Produto clicado: ${productId}`);
@@ -118,6 +121,7 @@ function ProductGrid() {
     <section className="product-grid-section">
       <div className="product-grid-container">
         <h2 className="product-grid-title">{title}</h2>
+        <h6>{termoBusca}</h6>
         
         <div className="product-grid">
           {products.map((product) => (

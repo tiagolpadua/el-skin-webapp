@@ -1,7 +1,8 @@
-import React, { useState } from 'react';
+import React, { useContext, useState } from 'react';
 import './Header.css';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faCartShopping, faSearch } from '@fortawesome/free-solid-svg-icons';
+import { BuscaContext } from '../../App';
 
 function Header() {
   const [textoBusca, setTextoBusca] = useState('');
@@ -14,6 +15,8 @@ function Header() {
   function onClickSearch(): void {
     console.log(`Você pesquisou por: ${textoBusca}`);
   }
+
+  const termoBusca = useContext(BuscaContext);
 
   return (
     <header className="header">
@@ -33,6 +36,8 @@ function Header() {
               <FontAwesomeIcon icon={faSearch}/>
             </button>
           </div>
+
+          <h6>{termoBusca}</h6>
 
           <div className="header-actions">
             <button className="cart-button">
