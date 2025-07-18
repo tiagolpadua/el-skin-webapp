@@ -1,17 +1,6 @@
 import React from 'react';
 import './ProductCard.css';
-
-export interface IProduct {
-  id: string;
-  name: string;
-  description: string;
-  price: number;
-  image: string;
-  tags: Array<{
-    label: string;
-    type: 'protection' | 'face';
-  }>;
-}
+import { IProduct } from '../../service/productService';
 
 interface ProductCardProps {
   product: IProduct;
