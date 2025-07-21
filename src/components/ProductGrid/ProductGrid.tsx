@@ -1,16 +1,16 @@
 
-import { useContext, useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
+import { useSearchContext } from '../../context/SearchContext';
 import { IProduct, productService } from '../../service/productService';
 import ProductCard from '../ProductCard/ProductCard';
 import './ProductGrid.css';
-import { SearchContext } from '../../context/SearchContext';
 
 function ProductGrid() {
   const title = 'nossos queridinhos estão aqui';
   const [products, setProducts] = useState<IProduct[]>([]);
   const [filteredProducts, setFilteredProducts] = useState<IProduct[]>([]);
   
-  const { search } = useContext(SearchContext);
+  const { search } = useSearchContext();
 
   useEffect(() => {
     const fetchProducts = async () => {
@@ -44,8 +44,6 @@ function ProductGrid() {
   return (
     <section className="product-grid-section">
       <div className="product-grid-container">
-
-        <h4>SearchContext {search}</h4>
 
         <h2 className="product-grid-title">{title}</h2>
         
