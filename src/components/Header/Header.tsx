@@ -61,6 +61,7 @@ function Header() {
             {searchTerm && (
               <button 
                 className="clear-search-button" 
+                data-testid="clear-search-button"
                 onClick={handleClearSearch}
                 type="button"
                 title="Limpar pesquisa"
@@ -71,7 +72,7 @@ function Header() {
           </div>
           
           <div className="header-actions">
-            <button className="cart-button" onClick={handleOnClickCart}>
+            <button className="cart-button" onClick={handleOnClickCart} data-testid="cart-button" type="button" >
               <FontAwesomeIcon icon={faCartShopping} />
               {getTotalItems() > 0 && (
                 <span className="cart-badge">{getTotalItems()}</span>
