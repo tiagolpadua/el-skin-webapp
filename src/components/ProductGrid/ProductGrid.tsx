@@ -50,7 +50,7 @@ function ProductGrid() {
         <h2 className="product-grid-title">{title}</h2>
         
         <div className="product-grid">
-          {products.map((product) => (
+          {filteredProducts.map((product) => (
             <ProductCard
               key={product.id}
               product={product}
