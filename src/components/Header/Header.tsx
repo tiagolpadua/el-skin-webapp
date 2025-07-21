@@ -1,11 +1,19 @@
 import { faCartShopping, faSearch } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import React from 'react';
+import React, { useState } from 'react';
 import { useSearchContext } from '../../context/SearchContext';
 import './Header.css';
+import CartModal from '../CartModal/CartModal';
+import { useCartContext } from '../../context/CartContext';
 
 function Header() {
   const { search, setSearch } = useSearchContext();
+  const { items } = useCartContext();
+  const [isCartModalOpen, setIsCartModalOpen] = useState(false);
+  
+  const handleCloseCart = () => {
+    setIsCartModalOpen(false);
+  };
 
   function handleOnChange(e: React.ChangeEvent<HTMLInputElement>) {
     setSearch(e.target.value);
@@ -13,6 +21,10 @@ function Header() {
 
   function onClickSearch(): void {
     console.log(`Você pesquisou por: ${search}`);
+  }
+
+  function handleOnClickCart() {
+    setIsCartModalOpen(true);
   }
 
   return (
@@ -36,7 +48,7 @@ function Header() {
           </div>
 
           <div className="header-actions">
-            <button className="cart-button">
+            <button className="cart-button" onClick={handleOnClickCart}>
               <FontAwesomeIcon icon={faCartShopping} />
             </button>
           </div>
@@ -45,9 +57,20 @@ function Header() {
 
       <nav className="header-nav">
       </nav>
+
+      <CartModal
+        isOpen={isCartModalOpen}
+        onClose={handleCloseCart}
+        items={items}
+      />
       
     </header>
   );
 }
+
+// items={items}
+// onUpdateQuantity={updateQuantity}
+// onRemoveItem={removeItem}
+// onFinalizePurchase={handleFinalizePurchase}
 
 export default Header;
