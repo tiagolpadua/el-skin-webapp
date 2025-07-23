@@ -2,20 +2,24 @@ import { faMinus, faPlus, faTimes, faTrash } from '@fortawesome/free-solid-svg-i
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import React from 'react';
 import './CartModal.css';
-import { CartItem } from '../../context/CartContext';
+import { useCartContext } from '../../context/CartContext';
 
 interface CartModalProps {
   isOpen: boolean;
   onClose: () => void;
-  items: CartItem[];
+}
+
+function formatPrice(price: number): string {
+  return `R$ ${price.toFixed(2).replace('.', ',')}`;
 }
 
 const CartModal: React.FC<CartModalProps> = ({
   isOpen,
   onClose,
-  items,
 }) => {
   if (!isOpen) return null;
+
+  const { items, updateQuantity, removeItem, getTotalPrice } = useCartContext();
 
   const handleBackdropClick = (e: React.MouseEvent) => {
     if (e.target === e.currentTarget) {
@@ -69,12 +73,14 @@ const CartModal: React.FC<CartModalProps> = ({
                         <div className="quantity-controls">
                           <button 
                             className="quantity-btn"
+                            onClick={() => updateQuantity(item.id, Math.max(1, item.quantity - 1))}
                           >
                             <FontAwesomeIcon icon={faMinus} />
                           </button>
                           <span className="quantity-display">{item.quantity}</span>
                           <button 
                             className="quantity-btn"
+                            onClick={() => updateQuantity(item.id, item.quantity + 1)}
                           >
                             <FontAwesomeIcon icon={faPlus} />
                           </button>
@@ -82,6 +88,7 @@ const CartModal: React.FC<CartModalProps> = ({
                         
                         <button 
                           className="remove-btn"
+                          onClick={() => removeItem(item.id)}
                           title="Remover item"
                         >
                           <FontAwesomeIcon icon={faTrash} />
@@ -89,7 +96,7 @@ const CartModal: React.FC<CartModalProps> = ({
                       </div>
                       
                       <div className="cart-item-price">
-                        {item.price * item.quantity}
+                        {formatPrice(item.price * item.quantity)}
                       </div>
                     </div>
                   </div>
@@ -98,7 +105,7 @@ const CartModal: React.FC<CartModalProps> = ({
 
               <div className="cart-total">
                 <span className="total-label">Total</span>
-                <span className="total-price">0</span>
+                <span className="total-price">{formatPrice(getTotalPrice())}</span>
               </div>
 
               <button 

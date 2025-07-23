@@ -1,5 +1,6 @@
 
-import { useEffect, useState } from 'react';
+import { useCallback, useEffect, useState } from 'react';
+import { useCartContext } from '../../context/CartContext';
 import { useSearchContext } from '../../context/SearchContext';
 import { IProduct, productService } from '../../service/productService';
 import ProductCard from '../ProductCard/ProductCard';
@@ -11,6 +12,7 @@ function ProductGrid() {
   const [filteredProducts, setFilteredProducts] = useState<IProduct[]>([]);
   
   const { search } = useSearchContext();
+  const { addItem } = useCartContext();
 
   useEffect(() => {
     const fetchProducts = async () => {
@@ -36,10 +38,19 @@ function ProductGrid() {
     console.log(`Produto clicado: ${productId}`);
   };
 
-  const handleBuyClick = (productId: string, event: React.MouseEvent) => {
+  const handleBuyClick = useCallback((productId: string, event: React.MouseEvent) => {
     event.stopPropagation();
     console.log(`Comprar produto: ${productId}`);
-  };
+
+    const produtoComprado = products.find(product => product.id === productId);
+
+    if(!produtoComprado) {
+      console.error(`Produto com ID ${productId} não encontrado.`);
+      return;
+    }
+
+    addItem(produtoComprado);
+  }, [products, addItem]);
 
   return (
     <section className="product-grid-section">

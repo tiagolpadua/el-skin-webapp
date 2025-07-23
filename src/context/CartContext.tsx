@@ -1,50 +1,23 @@
-import React, { createContext, ReactNode, useContext, useMemo, useState } from 'react';
+import React, { createContext, useContext, ReactNode } from 'react';
+import { useCart, UseCartReturn } from '../hooks/useCart';
 
-export interface CartItem {
-  id: string;
-  name: string;
-  price: number;
-  quantity: number;
-  image: string;
-}
+type CartContextType = UseCartReturn;
 
-export interface CartContextType {
-  items: CartItem[];
-}
+const CartContext = createContext<CartContextType | undefined>(undefined);
 
 interface CartProviderProps {
   children: ReactNode;
 }
 
-const CartContext = createContext<CartContextType | undefined>(undefined);
-
 export const CartProvider: React.FC<CartProviderProps> = ({ children }) => {
-  const [items, setItems] = useState<CartItem[]>([
-    {
-      id: '1',
-      name: 'Produto 1',
-      price: 100,
-      quantity: 1,
-      image: 'http://localhost:3000/prod2.jpg'
-    },
-    {
-      id: '2',
-      name: 'Produto 2',
-      price: 200,
-      quantity: 2,
-      image: 'http://localhost:3000/prod1.jpg'
-    }
-  ]);
-
-  const contextValue = useMemo(() => ({
-    items
-  }), [items]);
-
-  return <CartContext value={contextValue}>
-    {children}
-  </CartContext>;
+  const cart = useCart();
+  
+  return (
+    <CartContext.Provider value={cart}>
+      {children}
+    </CartContext.Provider>
+  );
 };
-
 
 export const useCartContext = (): CartContextType => {
   const context = useContext(CartContext);

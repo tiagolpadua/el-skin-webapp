@@ -61,16 +61,10 @@ function Header() {
       <CartModal
         isOpen={isCartModalOpen}
         onClose={handleCloseCart}
-        items={items}
       />
       
     </header>
   );
 }
-
-// items={items}
-// onUpdateQuantity={updateQuantity}
-// onRemoveItem={removeItem}
-// onFinalizePurchase={handleFinalizePurchase}
 
 export default Header;
