@@ -19,7 +19,7 @@ const CartModal: React.FC<CartModalProps> = ({
 }) => {
   if (!isOpen) return null;
 
-  const { items, updateQuantity, removeItem, getTotalPrice } = useCartContext();
+  const { items, updateQuantity, removeItem: removerProduto, totalPrice: totalPriceMemo } = useCartContext();
 
   const handleBackdropClick = (e: React.MouseEvent) => {
     if (e.target === e.currentTarget) {
@@ -88,7 +88,7 @@ const CartModal: React.FC<CartModalProps> = ({
                         
                         <button 
                           className="remove-btn"
-                          onClick={() => removeItem(item.id)}
+                          onClick={() => removerProduto(item.id)}
                           title="Remover item"
                         >
                           <FontAwesomeIcon icon={faTrash} />
@@ -105,7 +105,7 @@ const CartModal: React.FC<CartModalProps> = ({
 
               <div className="cart-total">
                 <span className="total-label">Total</span>
-                <span className="total-price">{formatPrice(getTotalPrice())}</span>
+                <span className="total-price">{formatPrice(totalPriceMemo)}</span>
               </div>
 
               <button 

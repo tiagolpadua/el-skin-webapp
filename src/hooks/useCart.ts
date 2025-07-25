@@ -1,4 +1,4 @@
-import { useState, useCallback } from 'react';
+import { useState, useCallback, useMemo } from 'react';
 
 interface ICartItem {
   id: string;
@@ -15,7 +15,7 @@ export interface UseCartReturn {
   updateQuantity: (id: string, quantity: number) => void;
   clearCart: () => void;
   getTotalItems: () => number;
-  getTotalPrice: () => number;
+  totalPrice: number;
 }
 
 export const useCart = (): UseCartReturn => {
@@ -24,7 +24,7 @@ export const useCart = (): UseCartReturn => {
   const addItem = useCallback((newItem: Omit<ICartItem, 'quantity'>) => {
     setItems(currentItems => {
       const existingItem = currentItems.find(item => item.id === newItem.id);
-      
+
       if (existingItem) {
         return currentItems.map(item =>
           item.id === newItem.id
@@ -32,7 +32,7 @@ export const useCart = (): UseCartReturn => {
             : item
         );
       }
-      
+
       return [...currentItems, { ...newItem, quantity: 1 }];
     });
   }, []);
@@ -46,7 +46,7 @@ export const useCart = (): UseCartReturn => {
       removeItem(id);
       return;
     }
-    
+
     setItems(currentItems =>
       currentItems.map(item =>
         item.id === id ? { ...item, quantity } : item
@@ -62,7 +62,7 @@ export const useCart = (): UseCartReturn => {
     return items.reduce((total, item) => total + item.quantity, 0);
   }, [items]);
 
-  const getTotalPrice = useCallback(() => {
+  const totalPrice = useMemo(() => {
     return items.reduce((total, item) => total + (item.price * item.quantity), 0);
   }, [items]);
 
@@ -73,6 +73,6 @@ export const useCart = (): UseCartReturn => {
     updateQuantity,
     clearCart,
     getTotalItems,
-    getTotalPrice,
+    totalPrice
   };
 };
