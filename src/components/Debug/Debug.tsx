@@ -1,15 +1,15 @@
-import React from 'react';
+import { ReactNode, FC } from 'react';
 import styled from 'styled-components';
 
 interface DebugProps {
-  children: React.ReactNode;
+  children: ReactNode;
 }
 
 const DebugContainer = styled.div`
   border: 1px solid red;
 `;
 
-const Debug: React.FC<DebugProps> = ({ children }) => {
+const Debug: FC<DebugProps> = ({ children }) => {
   return (
     <DebugContainer>
       {children}

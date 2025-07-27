@@ -1,7 +1,6 @@
-import React from 'react';
 import styled from 'styled-components';
-import Carousel from '../../components/Carousel/Carousel';
 import ProductGrid from '../../components/ProductGrid/ProductGrid';
+import Carousel from '../../components/Carousel/Carousel';
 
 const HomeContainer = styled.div`
   display: flex;
