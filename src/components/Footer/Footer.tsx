@@ -29,6 +29,141 @@ interface SocialLink {
   label: string;
 }
 
+
+const Footer: React.FC = () => {
+  const socialLinks: SocialLink[] = [
+    {
+      icon: faInstagram,
+      href: 'https://instagram.com/alskin',
+      label: 'Instagram'
+    },
+    {
+      icon: faFacebook,
+      href: 'https://facebook.com/alskin',
+      label: 'Facebook'
+    },
+    {
+      icon: faYoutube,
+      href: 'https://youtube.com/alskin',
+      label: 'YouTube'
+    },
+    {
+      icon: faPinterest,
+      href: 'https://pinterest.com/alskin',
+      label: 'Pinterest'
+    },
+    {
+      icon: faTwitter,
+      href: 'https://twitter.com/alskin',
+      label: 'Twitter'
+    },
+    {
+      icon: faLinkedin,
+      href: 'https://linkedin.com/company/alskin',
+      label: 'LinkedIn'
+    },
+    {
+      icon: faGlobe,
+      href: 'https://alskin.com.br',
+      label: 'Website'
+    }
+  ];
+
+  const footerSections: FooterSection[] = [
+    {
+      title: 'Sobre a AL SKIN',
+      links: [
+        { label: '- quem somos', href: '/about' },
+        { label: '- time AL SKIN', href: '/about' },
+        { label: '- carreiras', href: '/about' }
+      ]
+    },
+    {
+      title: 'Loja AL SKIN',
+      links: [
+        { label: '- lojas físicas', href: '/lojas' },
+        { label: '- devolução', href: '/devolucao' }
+      ]
+    },
+    {
+      title: 'Atendimento',
+      links: [
+        { label: '- oi@alskin.com.br', href: 'mailto:oi@alskin.com.br' },
+        { label: '- ajuda', href: '/ajuda' }
+      ]
+    },
+    {
+      title: 'Blog AL SKIN',
+      links: [
+        { label: '- Minha pele', href: '/blog/minha-pele' },
+        { label: '- Ingredientes', href: '/blog/ingredientes' }
+      ]
+    }
+  ];
+
+  const handleSocialClick = (socialLink: SocialLink) => {
+    console.log(`Abrindo ${socialLink.label}: ${socialLink.href}`);
+  };
+
+  return (
+    <StyledFooter>
+      <FooterSocial>
+        <FooterContainer>
+          <SocialIcons>
+            {socialLinks.map((social, index) => (
+              <SocialIcon
+                key={social.label}
+                index={index}
+                onClick={() => handleSocialClick(social)}
+                aria-label={`Abrir ${social.label}`}
+                type="button"
+              >
+                <FontAwesomeIcon icon={social.icon} />
+              </SocialIcon>
+            ))}
+          </SocialIcons>
+        </FooterContainer>
+      </FooterSocial>
+
+      <FooterLinks>
+        <FooterContainer>
+          <FooterSections>
+            {footerSections.map((section, index) => (
+              <FooterSection key={section.title} index={index}>
+                <FooterSectionTitle>{section.title}</FooterSectionTitle>
+                <FooterSectionLinks>
+                  {section.links.map((link) => (
+                    <li key={link.label}>
+                      <FooterLink to={link.href}>{link.label}</FooterLink> 
+                    </li>
+                  ))}
+                </FooterSectionLinks>
+              </FooterSection>
+            ))}
+          </FooterSections>
+        </FooterContainer>
+      </FooterLinks>
+
+      <FooterBottom>
+        <FooterContainer>
+          <div>
+            <FooterBrandName>AL SKIN</FooterBrandName>
+            <FooterCopyright>
+              2025 AL SKIN. Todos os direitos reservados.
+            </FooterCopyright>
+            <FooterAddress>
+              Av. Sete de Setembro, 467 - São Paulo/SP - CEP: 05240-010
+            </FooterAddress>
+          </div>
+        </FooterContainer>
+      </FooterBottom>
+    </StyledFooter>
+  );
+};
+
+export default Footer;
+
+// Styled Components
 const fadeInUp = keyframes`
   from {
     opacity: 0;
@@ -253,136 +388,3 @@ const FooterAddress = styled.p`
     font-size: 11px;
   }
 `;
-
-const Footer: React.FC = () => {
-  const socialLinks: SocialLink[] = [
-    {
-      icon: faInstagram,
-      href: 'https://instagram.com/alskin',
-      label: 'Instagram'
-    },
-    {
-      icon: faFacebook,
-      href: 'https://facebook.com/alskin',
-      label: 'Facebook'
-    },
-    {
-      icon: faYoutube,
-      href: 'https://youtube.com/alskin',
-      label: 'YouTube'
-    },
-    {
-      icon: faPinterest,
-      href: 'https://pinterest.com/alskin',
-      label: 'Pinterest'
-    },
-    {
-      icon: faTwitter,
-      href: 'https://twitter.com/alskin',
-      label: 'Twitter'
-    },
-    {
-      icon: faLinkedin,
-      href: 'https://linkedin.com/company/alskin',
-      label: 'LinkedIn'
-    },
-    {
-      icon: faGlobe,
-      href: 'https://alskin.com.br',
-      label: 'Website'
-    }
-  ];
-
-  const footerSections: FooterSection[] = [
-    {
-      title: 'Sobre a AL SKIN',
-      links: [
-        { label: '- quem somos', href: '/about' },
-        { label: '- time AL SKIN', href: '/about' },
-        { label: '- carreiras', href: '/about' }
-      ]
-    },
-    {
-      title: 'Loja AL SKIN',
-      links: [
-        { label: '- lojas físicas', href: '/lojas' },
-        { label: '- devolução', href: '/devolucao' }
-      ]
-    },
-    {
-      title: 'Atendimento',
-      links: [
-        { label: '- oi@alskin.com.br', href: 'mailto:oi@alskin.com.br' },
-        { label: '- ajuda', href: '/ajuda' }
-      ]
-    },
-    {
-      title: 'Blog AL SKIN',
-      links: [
-        { label: '- Minha pele', href: '/blog/minha-pele' },
-        { label: '- Ingredientes', href: '/blog/ingredientes' }
-      ]
-    }
-  ];
-
-  const handleSocialClick = (socialLink: SocialLink) => {
-    console.log(`Abrindo ${socialLink.label}: ${socialLink.href}`);
-  };
-
-  return (
-    <StyledFooter>
-      <FooterSocial>
-        <FooterContainer>
-          <SocialIcons>
-            {socialLinks.map((social, index) => (
-              <SocialIcon
-                key={social.label}
-                index={index}
-                onClick={() => handleSocialClick(social)}
-                aria-label={`Abrir ${social.label}`}
-                type="button"
-              >
-                <FontAwesomeIcon icon={social.icon} />
-              </SocialIcon>
-            ))}
-          </SocialIcons>
-        </FooterContainer>
-      </FooterSocial>
-
-      <FooterLinks>
-        <FooterContainer>
-          <FooterSections>
-            {footerSections.map((section, index) => (
-              <FooterSection key={section.title} index={index}>
-                <FooterSectionTitle>{section.title}</FooterSectionTitle>
-                <FooterSectionLinks>
-                  {section.links.map((link) => (
-                    <li key={link.label}>
-                      <FooterLink to={link.href}>{link.label}</FooterLink> 
-                    </li>
-                  ))}
-                </FooterSectionLinks>
-              </FooterSection>
-            ))}
-          </FooterSections>
-        </FooterContainer>
-      </FooterLinks>
-
-      <FooterBottom>
-        <FooterContainer>
-          <div>
-            <FooterBrandName>AL SKIN</FooterBrandName>
-            <FooterCopyright>
-              2025 AL SKIN. Todos os direitos reservados.
-            </FooterCopyright>
-            <FooterAddress>
-              Av. Sete de Setembro, 467 - São Paulo/SP - CEP: 05240-010
-            </FooterAddress>
-          </div>
-        </FooterContainer>
-      </FooterBottom>
-    </StyledFooter>
-  );
-};
-
-export default Footer;

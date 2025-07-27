@@ -4,6 +4,97 @@ import { useEffect, useState } from 'react';
 import styled, { keyframes } from 'styled-components';
 import { carouselService, ICarouselItem } from '../../services';
 
+function Carousel() {
+
+  const [carouselItems, setCarouselItems] = useState<ICarouselItem[]>([]);
+
+  const [idxItemAtual, setIdxItemAtual] = useState(0);
+  const [isAutoPlaying, setIsAutoPlaying] = useState(true);
+
+  useEffect(() => {
+    if (!isAutoPlaying) return;
+
+    const timer = setInterval(() => {
+      setIdxItemAtual(prevIdxItemAtual => {
+        return (prevIdxItemAtual + 1) % carouselItems.length;
+      });
+    }, 3000);
+
+    return () => clearInterval(timer);
+  }, [carouselItems.length, isAutoPlaying]);
+
+  useEffect(() => {
+    const fetchCarouselItems = async () => {
+      try {
+        const items = await carouselService.getCarouselItems();
+        setCarouselItems(items);
+      } catch (error) {
+        console.error('Erro ao carregar itens do carousel:', error);
+        // Aqui você pode implementar um estado de erro ou fallback
+      }
+    };
+
+    fetchCarouselItems();
+  }, []);
+
+  function previousItem() {
+    setIdxItemAtual(idxItemAtual => (idxItemAtual === 0 ? carouselItems.length - 1 : idxItemAtual - 1));
+  }
+
+  function nextItem() {
+    setIdxItemAtual(idxItemAtual => (idxItemAtual + 1) % carouselItems.length);
+  }
+
+  const handleMouseEnter = () => {
+    setIsAutoPlaying(false);
+  };
+
+  const handleMouseLeave = () => {
+    setIsAutoPlaying(true);
+  };
+
+  const handleComprarAgora = () => {
+    console.log('Botão clicado: Comprar Agora!');
+  };
+
+  return (
+    <>
+      {carouselItems.length > 0 && (
+        <CarouselSection 
+          backgroundImage={carouselItems[idxItemAtual].backgroundImage}
+          onMouseEnter={handleMouseEnter}
+          onMouseLeave={handleMouseLeave}
+        >
+          <CarouselContainer>
+            <CarouselContent>
+              <NavButton aria-label="Voltar" onClick={previousItem}>
+                <FontAwesomeIcon width="60" height="24" icon={faAngleLeft} />
+              </NavButton>
+            
+              <CarouselText>
+                <CarouselSubtitle>{carouselItems[idxItemAtual].subtitle}</CarouselSubtitle>
+                <CarouselTitle>{carouselItems[idxItemAtual].title}</CarouselTitle>
+                <CarouselDescription>{carouselItems[idxItemAtual].description}</CarouselDescription>
+                <CtaButton onClick={handleComprarAgora}>
+                  comprar agora
+                  <FontAwesomeIcon icon={faAngleRight} />
+                </CtaButton>
+              </CarouselText>
+
+              <NavButton aria-label="Próximo" onClick={nextItem}>
+                <FontAwesomeIcon width="60" height="24" icon={faAngleRight} />
+              </NavButton>
+            </CarouselContent>
+          </CarouselContainer>
+        </CarouselSection>
+      )}
+    </>
+  );
+}
+
+export default Carousel;
+
+// Styled Components
 const fadeInUp = keyframes`
   from {
     opacity: 0;
@@ -139,93 +230,3 @@ const CtaButton = styled.button`
     transform: translateY(0);
   }
 `;
-
-function Carousel() {
-
-  const [carouselItems, setCarouselItems] = useState<ICarouselItem[]>([]);
-
-  const [idxItemAtual, setIdxItemAtual] = useState(0);
-  const [isAutoPlaying, setIsAutoPlaying] = useState(true);
-
-  useEffect(() => {
-    if (!isAutoPlaying) return;
-
-    const timer = setInterval(() => {
-      setIdxItemAtual(prevIdxItemAtual => {
-        return (prevIdxItemAtual + 1) % carouselItems.length;
-      });
-    }, 3000);
-
-    return () => clearInterval(timer);
-  }, [carouselItems.length, isAutoPlaying]);
-
-  useEffect(() => {
-    const fetchCarouselItems = async () => {
-      try {
-        const items = await carouselService.getCarouselItems();
-        setCarouselItems(items);
-      } catch (error) {
-        console.error('Erro ao carregar itens do carousel:', error);
-        // Aqui você pode implementar um estado de erro ou fallback
-      }
-    };
-
-    fetchCarouselItems();
-  }, []);
-
-  function previousItem() {
-    setIdxItemAtual(idxItemAtual => (idxItemAtual === 0 ? carouselItems.length - 1 : idxItemAtual - 1));
-  }
-
-  function nextItem() {
-    setIdxItemAtual(idxItemAtual => (idxItemAtual + 1) % carouselItems.length);
-  }
-
-  const handleMouseEnter = () => {
-    setIsAutoPlaying(false);
-  };
-
-  const handleMouseLeave = () => {
-    setIsAutoPlaying(true);
-  };
-
-  const handleComprarAgora = () => {
-    console.log('Botão clicado: Comprar Agora!');
-  };
-
-  return (
-    <>
-      {carouselItems.length > 0 && (
-        <CarouselSection 
-          backgroundImage={carouselItems[idxItemAtual].backgroundImage}
-          onMouseEnter={handleMouseEnter}
-          onMouseLeave={handleMouseLeave}
-        >
-          <CarouselContainer>
-            <CarouselContent>
-              <NavButton aria-label="Voltar" onClick={previousItem}>
-                <FontAwesomeIcon width="60" height="24" icon={faAngleLeft} />
-              </NavButton>
-            
-              <CarouselText>
-                <CarouselSubtitle>{carouselItems[idxItemAtual].subtitle}</CarouselSubtitle>
-                <CarouselTitle>{carouselItems[idxItemAtual].title}</CarouselTitle>
-                <CarouselDescription>{carouselItems[idxItemAtual].description}</CarouselDescription>
-                <CtaButton onClick={handleComprarAgora}>
-                  comprar agora
-                  <FontAwesomeIcon icon={faAngleRight} />
-                </CtaButton>
-              </CarouselText>
-
-              <NavButton aria-label="Próximo" onClick={nextItem}>
-                <FontAwesomeIcon width="60" height="24" icon={faAngleRight} />
-              </NavButton>
-            </CarouselContent>
-          </CarouselContainer>
-        </CarouselSection>
-      )}
-    </>
-  );
-}
-
-export default Carousel;

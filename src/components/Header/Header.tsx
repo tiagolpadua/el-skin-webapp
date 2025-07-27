@@ -7,6 +7,108 @@ import CartModal from '../CartModal/CartModal';
 import { useCartContext } from '../../context/CartContext';
 import { useSearchContext } from '../../context/SearchContext';
 
+function Header() {
+  const [isCartModalOpen, setIsCartModalOpen] = useState(false);
+  
+  const { items, updateQuantity, removeItem, getTotalItems } = useCartContext();
+  const { searchTerm, setSearchTerm } = useSearchContext();
+
+  function handleOnChangeBuscador(e: React.ChangeEvent<HTMLInputElement>) {
+    const valor = e.target.value;
+    setSearchTerm(valor);
+    console.log('Valor buscado:', valor);
+  }
+
+  const handleClearSearch = () => {
+    setSearchTerm('');
+  };
+
+  function handleOnClickCart() {
+    setIsCartModalOpen(true);
+  }
+
+  const handleCloseCart = () => {
+    setIsCartModalOpen(false);
+  };
+
+  const handleFinalizePurchase = () => {
+    console.log('Finalizando compra...');
+    // Aqui você implementaria a lógica de checkout
+    setIsCartModalOpen(false);
+  };
+
+  return (
+    <StyledHeader>
+      <HeaderTop>
+        <Container>
+          <FooterLink to={'/'}>
+            <Logo>
+              <span>AL SKIN</span>
+            </Logo>  
+          </FooterLink> 
+          
+          <SearchBar>
+            <SearchInput 
+              type="text" 
+              placeholder="O que você está procurando?"
+              value={searchTerm}
+              onChange={handleOnChangeBuscador}
+            />
+            <SearchButton type="button">
+              <FontAwesomeIcon icon={faSearch} />
+            </SearchButton>
+            {searchTerm && (
+              <ClearSearchButton 
+                data-testid="clear-search-button"
+                onClick={handleClearSearch}
+                type="button"
+                title="Limpar pesquisa"
+              >
+                <FontAwesomeIcon icon={faTimes} />
+              </ClearSearchButton>
+            )}
+          </SearchBar>
+          
+          <HeaderActions>
+            <CartButton onClick={handleOnClickCart} data-testid="cart-button" type="button" >
+              <FontAwesomeIcon icon={faCartShopping} />
+              {getTotalItems() > 0 && (
+                <CartBadge>{getTotalItems()}</CartBadge>
+              )}
+            </CartButton>
+          </HeaderActions>
+        </Container>
+      </HeaderTop>
+      
+      <HeaderNav>
+        <Container>
+          <NavMenu>
+            <li><a href="#categorias">Categorias</a></li>
+            <li><a href="#tipo-pele">Tipo de pele</a></li>
+            <li><a href="#necessidade">Necessidade</a></li>
+            <li><a href="#ingredientes">Ingredientes</a></li>
+          </NavMenu>
+          <PromoBadge>
+            Kits até 50% OFF
+          </PromoBadge>
+        </Container>
+      </HeaderNav>
+      
+      <CartModal
+        isOpen={isCartModalOpen}
+        onClose={handleCloseCart}
+        items={items}
+        onUpdateQuantity={updateQuantity}
+        onRemoveItem={removeItem}
+        onFinalizePurchase={handleFinalizePurchase}
+      />
+    </StyledHeader>
+  );
+}
+
+export default Header;
+
+// Styled Components
 const pulse = keyframes`
   0% {
     transform: scale(1);
@@ -197,104 +299,3 @@ const PromoBadge = styled.div`
   font-weight: ${({ theme }) => theme.fontWeight.medium};
   white-space: nowrap;
 `;
-
-function Header() {
-  const [isCartModalOpen, setIsCartModalOpen] = useState(false);
-  
-  const { items, updateQuantity, removeItem, getTotalItems } = useCartContext();
-  const { searchTerm, setSearchTerm } = useSearchContext();
-
-  function handleOnChangeBuscador(e: React.ChangeEvent<HTMLInputElement>) {
-    const valor = e.target.value;
-    setSearchTerm(valor);
-    console.log('Valor buscado:', valor);
-  }
-
-  const handleClearSearch = () => {
-    setSearchTerm('');
-  };
-
-  function handleOnClickCart() {
-    setIsCartModalOpen(true);
-  }
-
-  const handleCloseCart = () => {
-    setIsCartModalOpen(false);
-  };
-
-  const handleFinalizePurchase = () => {
-    console.log('Finalizando compra...');
-    // Aqui você implementaria a lógica de checkout
-    setIsCartModalOpen(false);
-  };
-
-  return (
-    <StyledHeader>
-      <HeaderTop>
-        <Container>
-          <FooterLink to={'/'}>
-            <Logo>
-              <span>AL SKIN</span>
-            </Logo>  
-          </FooterLink> 
-          
-          <SearchBar>
-            <SearchInput 
-              type="text" 
-              placeholder="O que você está procurando?"
-              value={searchTerm}
-              onChange={handleOnChangeBuscador}
-            />
-            <SearchButton type="button">
-              <FontAwesomeIcon icon={faSearch} />
-            </SearchButton>
-            {searchTerm && (
-              <ClearSearchButton 
-                data-testid="clear-search-button"
-                onClick={handleClearSearch}
-                type="button"
-                title="Limpar pesquisa"
-              >
-                <FontAwesomeIcon icon={faTimes} />
-              </ClearSearchButton>
-            )}
-          </SearchBar>
-          
-          <HeaderActions>
-            <CartButton onClick={handleOnClickCart} data-testid="cart-button" type="button" >
-              <FontAwesomeIcon icon={faCartShopping} />
-              {getTotalItems() > 0 && (
-                <CartBadge>{getTotalItems()}</CartBadge>
-              )}
-            </CartButton>
-          </HeaderActions>
-        </Container>
-      </HeaderTop>
-      
-      <HeaderNav>
-        <Container>
-          <NavMenu>
-            <li><a href="#categorias">Categorias</a></li>
-            <li><a href="#tipo-pele">Tipo de pele</a></li>
-            <li><a href="#necessidade">Necessidade</a></li>
-            <li><a href="#ingredientes">Ingredientes</a></li>
-          </NavMenu>
-          <PromoBadge>
-            Kits até 50% OFF
-          </PromoBadge>
-        </Container>
-      </HeaderNav>
-      
-      <CartModal
-        isOpen={isCartModalOpen}
-        onClose={handleCloseCart}
-        items={items}
-        onUpdateQuantity={updateQuantity}
-        onRemoveItem={removeItem}
-        onFinalizePurchase={handleFinalizePurchase}
-      />
-    </StyledHeader>
-  );
-}
-
-export default Header;

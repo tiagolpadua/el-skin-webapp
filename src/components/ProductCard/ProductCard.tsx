@@ -9,6 +9,60 @@ interface ProductCardProps {
   onBuyClick: (productId: string, event: React.MouseEvent) => void;
 }
 
+const ProductCard: React.FC<ProductCardProps> = ({
+  product,
+  onProductClick,
+  onBuyClick
+}) => {
+  const formatPrice = (price: number): string => {
+    return `R$ ${price.toFixed(2).replace('.', ',')}`;
+  };
+
+  return (
+    <StyledProductCard
+      data-testid="product-card"
+      onClick={() => onProductClick(product.id)}>
+      <ProductImage>
+        <img 
+          src={product.image} 
+          alt={product.name}
+        />
+      </ProductImage>
+      
+      <ProductInfo>
+        <ProductName>{product.name}</ProductName>
+        <ProductDescription>{product.description}</ProductDescription>
+        
+        <ProductTags>
+          {product.tags.map((tag, index) => (
+            <ProductTag 
+              key={`${product.id}-tag-${index}-${tag.label || 'no-label'}-${tag.type || 'no-type'}`}
+              tagType={tag.type}
+            >
+              {tag.label}
+            </ProductTag>
+          ))}
+        </ProductTags>
+        
+        <ProductFooter>
+          <ProductPrice>
+            {formatPrice(product.price)}
+          </ProductPrice>
+          <ProductBuyButton 
+            onClick={(e) => onBuyClick(product.id, e)}
+            type="button"
+          >
+            comprar
+          </ProductBuyButton>
+        </ProductFooter>
+      </ProductInfo>
+    </StyledProductCard>
+  );
+};
+
+export default ProductCard;
+
+// Styled Components
 const StyledProductCard = styled.a`
   background: ${({ theme }) => theme.colors.background.card};
   border-radius: ${({ theme }) => theme.borderRadius.lg};
@@ -171,56 +225,3 @@ const ProductBuyButton = styled.button`
     text-align: center;
   }
 `;
-
-const ProductCard: React.FC<ProductCardProps> = ({
-  product,
-  onProductClick,
-  onBuyClick
-}) => {
-  const formatPrice = (price: number): string => {
-    return `R$ ${price.toFixed(2).replace('.', ',')}`;
-  };
-
-  return (
-    <StyledProductCard
-      data-testid="product-card"
-      onClick={() => onProductClick(product.id)}>
-      <ProductImage>
-        <img 
-          src={product.image} 
-          alt={product.name}
-        />
-      </ProductImage>
-      
-      <ProductInfo>
-        <ProductName>{product.name}</ProductName>
-        <ProductDescription>{product.description}</ProductDescription>
-        
-        <ProductTags>
-          {product.tags.map((tag, index) => (
-            <ProductTag 
-              key={`${product.id}-tag-${index}-${tag.label || 'no-label'}-${tag.type || 'no-type'}`}
-              tagType={tag.type}
-            >
-              {tag.label}
-            </ProductTag>
-          ))}
-        </ProductTags>
-        
-        <ProductFooter>
-          <ProductPrice>
-            {formatPrice(product.price)}
-          </ProductPrice>
-          <ProductBuyButton 
-            onClick={(e) => onBuyClick(product.id, e)}
-            type="button"
-          >
-            comprar
-          </ProductBuyButton>
-        </ProductFooter>
-      </ProductInfo>
-    </StyledProductCard>
-  );
-};
-
-export default ProductCard;
