@@ -24,24 +24,14 @@ const CarouselSection = styled.section<CarouselSectionProps>`
   min-height: 500px;
   display: flex;
   align-items: center;
-  background: linear-gradient(135deg, rgba(255, 255, 255, 0.95) 0%, rgba(255, 255, 255, 0.85) 40%, transparent 60%),
-              linear-gradient(45deg, #f8f6f3 0%, #e8e4e0 100%),
-              url(${props => props.backgroundImage});
+  background: ${({ backgroundImage }) =>
+    backgroundImage
+      ? `linear-gradient(rgba(255,255,255,0.0), rgba(255,255,255,0.7)), url('${backgroundImage}')`
+      : 'transparent'};
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
   overflow: hidden;
-
-  &::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    background: linear-gradient(135deg, rgba(255, 255, 255, 0.1) 0%, transparent 50%);
-    pointer-events: none;
-  }
 `;
 
 const CarouselContainer = styled.div`

@@ -30,8 +30,8 @@
       "price": 45.99,
       "image": "/assets/prod1.jpg",
       "tags": [
-        "face",
-        "hydration"
+        { "label": "Rosto", "type": "face" },
+        { "label": "Hidratação", "type": "face" }
       ]
     },
     {
@@ -41,8 +41,8 @@
       "price": 89.90,
       "image": "/assets/prod2.jpg",
       "tags": [
-        "protection",
-        "sun"
+        { "label": "Proteção Solar", "type": "protection" },
+        { "label": "Rosto", "type": "face" }
       ]
     },
     {
@@ -52,8 +52,8 @@
       "price": 32.50,
       "image": "/assets/prod3.jpg",
       "tags": [
-        "face",
-        "cleansing"
+        { "label": "Rosto", "type": "face" },
+        { "label": "Limpeza", "type": "face" }
       ]
     },
     {
@@ -63,8 +63,8 @@
       "price": 78.20,
       "image": "/assets/prod4.jpg",
       "tags": [
-        "face",
-        "anti-aging"
+        { "label": "Rosto", "type": "face" },
+        { "label": "Anti-idade", "type": "face" }
       ]
     },
     {
@@ -74,8 +74,8 @@
       "price": 12.75,
       "image": "/assets/prod5.jpg",
       "tags": [
-        "lips",
-        "hydration"
+        { "label": "Rosto", "type": "face" },
+        { "label": "Hidratação", "type": "face" }
       ]
     },
     {
@@ -85,8 +85,8 @@
       "price": 25.80,
       "image": "/assets/prod6.jpg",
       "tags": [
-        "face",
-        "exfoliation"
+        { "label": "Rosto", "type": "face" },
+        { "label": "Esfoliação", "type": "face" }
       ]
     },
     {
@@ -96,8 +96,8 @@
       "price": 38.40,
       "image": "/assets/prod7.jpg",
       "tags": [
-        "face",
-        "toning"
+        { "label": "Rosto", "type": "face" },
+        { "label": "Tônico", "type": "face" }
       ]
     },
     {
@@ -107,8 +107,8 @@
       "price": 65.30,
       "image": "/assets/prod8.jpg",
       "tags": [
-        "body",
-        "hydration"
+        { "label": "Proteção Solar", "type": "protection" },
+        { "label": "Hidratação", "type": "face" }
       ]
     }
   ]

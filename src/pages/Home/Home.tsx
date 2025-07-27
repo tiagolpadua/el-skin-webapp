@@ -1,12 +1,19 @@
+import React from 'react';
+import styled from 'styled-components';
 import Carousel from '../../components/Carousel/Carousel';
 import ProductGrid from '../../components/ProductGrid/ProductGrid';
 
+const HomeContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+`;
+
 function Home() {
   return (
-    <div>
-      <Carousel/>
-      <ProductGrid/>
-    </div>
+    <HomeContainer>
+      <Carousel />
+      <ProductGrid />
+    </HomeContainer>
   );
 }
 

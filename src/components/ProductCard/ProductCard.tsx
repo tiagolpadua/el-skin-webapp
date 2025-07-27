@@ -197,9 +197,9 @@ const ProductCard: React.FC<ProductCardProps> = ({
         <ProductDescription>{product.description}</ProductDescription>
         
         <ProductTags>
-          {product.tags.map((tag) => (
+          {product.tags.map((tag, index) => (
             <ProductTag 
-              key={`${product.id}-${tag.label}-${tag.type}`}
+              key={`${product.id}-tag-${index}-${tag.label || 'no-label'}-${tag.type || 'no-type'}`}
               tagType={tag.type}
             >
               {tag.label}
