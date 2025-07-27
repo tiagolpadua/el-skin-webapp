@@ -41,22 +41,22 @@ const fadeInUp = keyframes`
 `;
 
 const StyledFooter = styled.footer`
-  background-color: ${({ theme }) => theme.colors.background.light};
+  background-color: ${({ theme }) => theme.semantic.colors.background.secondary};
   margin-top: 60px;
 `;
 
 const FooterContainer = styled.div`
   max-width: 1200px;
   margin: 0 auto;
-  padding: 0 ${({ theme }) => theme.spacing.xl};
+  padding: 0 ${({ theme }) => theme.spacing[8]};
 
   ${media.md} {
-    padding: 0 ${({ theme }) => theme.spacing.md};
+    padding: 0 ${({ theme }) => theme.spacing[4]};
   }
 `;
 
 const FooterSocial = styled.div`
-  background-color: ${({ theme }) => theme.colors.background.white};
+  background-color: ${({ theme }) => theme.semantic.colors.background.primary};
   padding: 40px 0;
   border-bottom: 1px solid #e9ecef;
 
@@ -68,31 +68,31 @@ const FooterSocial = styled.div`
 const SocialIcons = styled.div`
   display: flex;
   justify-content: center;
-  gap: ${({ theme }) => theme.spacing.xl};
+  gap: ${({ theme }) => theme.spacing[8]};
   flex-wrap: wrap;
 
   ${media.md} {
-    gap: ${({ theme }) => theme.spacing.lg};
+    gap: ${({ theme }) => theme.spacing[6]};
   }
 
   ${media.sm} {
-    gap: ${({ theme }) => theme.spacing.lg};
+    gap: ${({ theme }) => theme.spacing[6]};
   }
 `;
 
 const SocialIcon = styled.button<{ index: number }>`
   width: 50px;
   height: 50px;
-  border-radius: ${({ theme }) => theme.borderRadius.round};
+  border-radius: ${({ theme }) => theme.borderRadius.full};
   background-color: #6c757d;
-  color: ${({ theme }) => theme.colors.text.white};
+  color: ${({ theme }) => theme.semantic.colors.text.inverse};
   border: none;
   display: flex;
   align-items: center;
   justify-content: center;
   cursor: pointer;
   transition: all ${({ theme }) => theme.transitions.normal};
-  font-size: ${({ theme }) => theme.fontSize.xl};
+  font-size: ${({ theme }) => theme.fontSizes.xl};
   animation: ${fadeInUp} 0.6s ease-out ${({ index }) => 0.1 + (index * 0.05)}s forwards;
 
   &:hover {
@@ -109,18 +109,18 @@ const SocialIcon = styled.button<{ index: number }>`
   ${media.md} {
     width: 45px;
     height: 45px;
-    font-size: ${({ theme }) => theme.fontSize.lg};
+    font-size: ${({ theme }) => theme.fontSizes.lg};
   }
 
   ${media.sm} {
     width: 40px;
     height: 40px;
-    font-size: ${({ theme }) => theme.fontSize.base};
+    font-size: ${({ theme }) => theme.fontSizes.base};
   }
 `;
 
 const FooterLinks = styled.div`
-  background-color: ${({ theme }) => theme.colors.background.light};
+  background-color: ${({ theme }) => theme.semantic.colors.background.secondary};
   padding: 50px 0;
 
   ${media.md} {
@@ -155,19 +155,19 @@ const FooterSection = styled.div<{ index: number }>`
 `;
 
 const FooterSectionTitle = styled.h3`
-  font-size: ${({ theme }) => theme.fontSize.lg};
-  font-weight: ${({ theme }) => theme.fontWeight.semibold};
-  color: ${({ theme }) => theme.colors.text.primary};
-  margin-bottom: ${({ theme }) => theme.spacing.xl};
+  font-size: ${({ theme }) => theme.fontSizes.lg};
+  font-weight: ${({ theme }) => theme.fontWeights.semibold};
+  color: ${({ theme }) => theme.semantic.colors.text.primary};
+  margin-bottom: ${({ theme }) => theme.spacing[8]};
   margin-top: 0;
 
   ${media.md} {
-    font-size: ${({ theme }) => theme.fontSize.base};
-    margin-bottom: ${({ theme }) => theme.spacing.md};
+    font-size: ${({ theme }) => theme.fontSizes.base};
+    margin-bottom: ${({ theme }) => theme.spacing[4]};
   }
 
   ${media.sm} {
-    font-size: ${({ theme }) => theme.fontSize.sm};
+    font-size: ${({ theme }) => theme.fontSizes.sm};
   }
 `;
 
@@ -177,7 +177,7 @@ const FooterSectionLinks = styled.ul`
   margin: 0;
 
   li {
-    margin-bottom: ${({ theme }) => theme.spacing.lg};
+    margin-bottom: ${({ theme }) => theme.spacing[6]};
   }
 `;
 
@@ -185,7 +185,7 @@ const FooterLink = styled(Link)`
   background: none;
   border: none;
   color: #6c757d;
-  font-size: ${({ theme }) => theme.fontSize.sm};
+  font-size: ${({ theme }) => theme.fontSizes.sm};
   cursor: pointer;
   transition: color ${({ theme }) => theme.transitions.normal};
   text-align: left;
@@ -204,13 +204,13 @@ const FooterLink = styled(Link)`
   }
 
   ${media.sm} {
-    font-size: ${({ theme }) => theme.fontSize.xs};
+    font-size: ${({ theme }) => theme.fontSizes.xs};
   }
 `;
 
 const FooterBottom = styled.div`
-  background-color: ${({ theme }) => theme.colors.text.primary};
-  color: ${({ theme }) => theme.colors.text.white};
+  background-color: ${({ theme }) => theme.semantic.colors.text.primary};
+  color: ${({ theme }) => theme.semantic.colors.text.inverse};
   padding: 30px 0;
   text-align: center;
 
@@ -220,32 +220,32 @@ const FooterBottom = styled.div`
 `;
 
 const FooterBrandName = styled.h2`
-  font-size: ${({ theme }) => theme.fontSize['2xl']};
-  font-weight: ${({ theme }) => theme.fontWeight.bold};
-  margin: 0 0 ${({ theme }) => theme.spacing.lg} 0;
-  color: ${({ theme }) => theme.colors.text.white};
+  font-size: ${({ theme }) => theme.fontSizes['2xl']};
+  font-weight: ${({ theme }) => theme.fontWeights.bold};
+  margin: 0 0 ${({ theme }) => theme.spacing[6]} 0;
+  color: ${({ theme }) => theme.semantic.colors.text.inverse};
 
   ${media.md} {
-    font-size: ${({ theme }) => theme.fontSize.xl};
+    font-size: ${({ theme }) => theme.fontSizes.xl};
   }
 
   ${media.sm} {
-    font-size: ${({ theme }) => theme.fontSize.lg};
+    font-size: ${({ theme }) => theme.fontSizes.lg};
   }
 `;
 
 const FooterCopyright = styled.p`
-  font-size: ${({ theme }) => theme.fontSize.sm};
-  margin: 0 0 ${({ theme }) => theme.spacing.sm} 0;
+  font-size: ${({ theme }) => theme.fontSizes.sm};
+  margin: 0 0 ${({ theme }) => theme.spacing[2]} 0;
   color: #adb5bd;
 
   ${media.sm} {
-    font-size: ${({ theme }) => theme.fontSize.xs};
+    font-size: ${({ theme }) => theme.fontSizes.xs};
   }
 `;
 
 const FooterAddress = styled.p`
-  font-size: ${({ theme }) => theme.fontSize.xs};
+  font-size: ${({ theme }) => theme.fontSizes.xs};
   margin: 0;
   color: #6c757d;
 

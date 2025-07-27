@@ -18,8 +18,8 @@ const fadeInUp = keyframes`
 `;
 
 const ProductGridSection = styled.section`
-  padding: 60px ${({ theme }) => theme.spacing.xl};
-  background-color: ${({ theme }) => theme.colors.background.white};
+  padding: 60px ${({ theme }) => theme.spacing[8]};
+  background-color: ${({ theme }) => theme.semantic.colors.background.primary};
 `;
 
 const ProductGridContainer = styled.div`
@@ -29,9 +29,9 @@ const ProductGridContainer = styled.div`
 
 const ProductGridTitle = styled.h2`
   text-align: center;
-  font-size: ${({ theme }) => theme.fontSize['2xl']};
-  font-weight: ${({ theme }) => theme.fontWeight.semibold};
-  color: ${({ theme }) => theme.colors.text.primary};
+  font-size: ${({ theme }) => theme.fontSizes['2xl']};
+  font-weight: ${({ theme }) => theme.fontWeights.semibold};
+  color: ${({ theme }) => theme.semantic.colors.text.primary};
   margin-bottom: 40px;
 `;
 
@@ -56,43 +56,43 @@ const SearchInfo = styled.div`
   text-align: center;
 
   p {
-    color: ${({ theme }) => theme.colors.text.secondary};
-    font-size: ${({ theme }) => theme.fontSize.base};
+    color: ${({ theme }) => theme.semantic.colors.text.secondary};
+    font-size: ${({ theme }) => theme.fontSizes.base};
     margin: 0;
-    padding: 10px ${({ theme }) => theme.spacing.xl};
-    background-color: ${({ theme }) => theme.colors.background.light};
+    padding: 10px ${({ theme }) => theme.spacing[8]};
+    background-color: ${({ theme }) => theme.semantic.colors.background.secondary};
     border-radius: ${({ theme }) => theme.borderRadius.md};
     border-left: 4px solid #8b5cf6;
 
     ${media.md} {
-      font-size: ${({ theme }) => theme.fontSize.sm};
-      padding: ${({ theme }) => theme.spacing.sm} ${({ theme }) => theme.spacing.md};
+      font-size: ${({ theme }) => theme.fontSizes.sm};
+      padding: ${({ theme }) => theme.spacing[2]} ${({ theme }) => theme.spacing[4]};
     }
   }
 
   strong {
-    color: ${({ theme }) => theme.colors.text.primary};
+    color: ${({ theme }) => theme.semantic.colors.text.primary};
   }
 `;
 
 const NoProductsFound = styled.div`
   grid-column: 1 / -1;
   text-align: center;
-  padding: 60px ${({ theme }) => theme.spacing.xl};
-  color: ${({ theme }) => theme.colors.text.secondary};
+  padding: 60px ${({ theme }) => theme.spacing[8]};
+  color: ${({ theme }) => theme.semantic.colors.text.secondary};
 
   p {
-    font-size: ${({ theme }) => theme.fontSize.lg};
-    padding: ${({ theme }) => theme.spacing.xl};
-    background-color: ${({ theme }) => theme.colors.background.light};
+    font-size: ${({ theme }) => theme.fontSizes.lg};
+    padding: ${({ theme }) => theme.spacing[8]};
+    background-color: ${({ theme }) => theme.semantic.colors.background.secondary};
     border-radius: ${({ theme }) => theme.borderRadius.lg};
-    border: 2px dashed ${({ theme }) => theme.colors.border.medium};
+    border: 2px dashed ${({ theme }) => theme.semantic.colors.border.secondary};
     max-width: 500px;
     margin: 0 auto;
 
     ${media.md} {
-      font-size: ${({ theme }) => theme.fontSize.base};
-      padding: ${({ theme }) => theme.spacing.md};
+      font-size: ${({ theme }) => theme.fontSizes.base};
+      padding: ${({ theme }) => theme.spacing[4]};
     }
   }
 `;

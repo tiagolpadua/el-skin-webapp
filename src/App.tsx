@@ -1,14 +1,15 @@
 import React from 'react';
-import './App.css';
 import AppRouter from './routes';
 import { CartProvider } from './context/CartContext';
 import { SearchProvider } from './context/SearchContext';
 import { ThemeProvider } from 'styled-components';
-import { theme } from './styles/theme';
+import { themeV2 } from './styles/theme-v2';
+import { GlobalStyles } from './styles/GlobalStyles';
 
 function App() {
   return (
-    <ThemeProvider theme={theme}>
+    <ThemeProvider theme={themeV2}>
+      <GlobalStyles />
       <SearchProvider>
         <CartProvider>
           <AppRouter />

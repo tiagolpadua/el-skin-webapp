@@ -48,7 +48,7 @@ const CarouselContainer = styled.div`
   width: 100%;
   max-width: 1200px;
   margin: 0 auto;
-  padding: 0 ${({ theme }) => theme.spacing.xl};
+  padding: 0 ${({ theme }) => theme.spacing[8]};
   position: relative;
   z-index: 2;
 `;
@@ -56,7 +56,7 @@ const CarouselContainer = styled.div`
 const CarouselContent = styled.div`
   display: flex;
   align-items: center;
-  gap: ${({ theme }) => theme.spacing.xl};
+  gap: ${({ theme }) => theme.spacing[8]};
   max-width: 1000px;
 `;
 
@@ -94,55 +94,55 @@ const CarouselText = styled.div`
 
 const CarouselSubtitle = styled.span`
   display: block;
-  font-size: ${({ theme }) => theme.fontSize.base};
-  color: ${({ theme }) => theme.colors.primary};
-  margin-bottom: ${({ theme }) => theme.spacing.sm};
-  font-weight: ${({ theme }) => theme.fontWeight.normal};
+  font-size: ${({ theme }) => theme.fontSizes.base};
+  color: ${({ theme }) => theme.colors.primary[600]};
+  margin-bottom: ${({ theme }) => theme.spacing[2]};
+  font-weight: ${({ theme }) => theme.fontWeights.normal};
   letter-spacing: 0.5px;
   animation-delay: 0.1s;
 `;
 
 const CarouselTitle = styled.h1`
-  font-size: ${({ theme }) => theme.fontSize['6xl']};
-  font-weight: ${({ theme }) => theme.fontWeight.bold};
-  color: ${({ theme }) => theme.colors.primary};
+  font-size: ${({ theme }) => theme.fontSizes['6xl']};
+  font-weight: ${({ theme }) => theme.fontWeights.bold};
+  color: ${({ theme }) => theme.colors.primary[600]};
   margin: 0;
-  margin-bottom: ${({ theme }) => theme.spacing.md};
-  line-height: ${({ theme }) => theme.lineHeight.tight};
+  margin-bottom: ${({ theme }) => theme.spacing[4]};
+  line-height: ${({ theme }) => theme.lineHeights.tight};
   text-shadow: 2px 2px 4px rgba(139, 74, 139, 0.1);
   animation-delay: 0.2s;
 `;
 
 const CarouselDescription = styled.p`
-  font-size: ${({ theme }) => theme.fontSize.lg};
-  color: ${({ theme }) => theme.colors.text.secondary};
-  margin-bottom: ${({ theme }) => theme.spacing.xxl};
-  line-height: ${({ theme }) => theme.lineHeight.loose};
+  font-size: ${({ theme }) => theme.fontSizes.lg};
+  color: ${({ theme }) => theme.semantic.colors.text.secondary};
+  margin-bottom: ${({ theme }) => theme.spacing[12]};
+  line-height: ${({ theme }) => theme.lineHeights.loose};
   max-width: 400px;
   animation-delay: 0.3s;
 `;
 
 const CtaButton = styled.button`
-  background: ${({ theme }) => theme.colors.primaryGradient};
-  color: ${({ theme }) => theme.colors.text.white};
+  background: linear-gradient(135deg, ${({ theme }) => theme.colors.primary[600]}, ${({ theme }) => theme.colors.primary[700]});
+  color: ${({ theme }) => theme.semantic.colors.text.inverse};
   border: none;
-  padding: ${({ theme }) => theme.spacing.md} ${({ theme }) => theme.spacing.xxl};
-  border-radius: ${({ theme }) => theme.borderRadius.xxl};
-  font-size: ${({ theme }) => theme.fontSize.base};
-  font-weight: ${({ theme }) => theme.fontWeight.semibold};
+  padding: ${({ theme }) => theme.spacing[4]} ${({ theme }) => theme.spacing[12]};
+  border-radius: ${({ theme }) => theme.borderRadius['2xl']};
+  font-size: ${({ theme }) => theme.fontSizes.base};
+  font-weight: ${({ theme }) => theme.fontWeights.semibold};
   cursor: pointer;
   transition: all ${({ theme }) => theme.transitions.normal};
   display: flex;
   align-items: center;
-  gap: ${({ theme }) => theme.spacing.sm};
+  gap: ${({ theme }) => theme.spacing[2]};
   box-shadow: ${({ theme }) => theme.shadows.primary};
   text-transform: lowercase;
   animation-delay: 0.4s;
 
   &:hover {
-    background: ${({ theme }) => theme.colors.primaryGradientHover};
+    background: linear-gradient(135deg, ${({ theme }) => theme.colors.primary[700]}, ${({ theme }) => theme.colors.primary[800]});
     transform: translateY(-2px);
-    box-shadow: ${({ theme }) => theme.shadows.primaryHover};
+    box-shadow: ${({ theme }) => theme.shadows.primaryLg};
   }
 
   &:active {

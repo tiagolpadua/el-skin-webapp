@@ -47,7 +47,7 @@ const ModalOverlay = styled.div`
   left: 0;
   width: 100%;
   height: 100%;
-  background: ${({ theme }) => theme.colors.cart.overlay};
+  background: ${({ theme }) => theme.semantic.colors.background.overlay};
   display: flex;
   justify-content: center;
   align-items: center;
@@ -57,14 +57,14 @@ const ModalOverlay = styled.div`
 `;
 
 const Modal = styled.div`
-  background: ${({ theme }) => theme.colors.cart.background};
+  background: ${({ theme }) => theme.semantic.colors.surface.primary};
   border-radius: ${({ theme }) => theme.borderRadius.lg};
   width: 90%;
   max-width: 500px;
   max-height: 90vh;
   overflow: hidden;
-  box-shadow: ${({ theme }) => theme.shadows.cart};
-  color: ${({ theme }) => theme.colors.text.white};
+  box-shadow: ${({ theme }) => theme.shadows['2xl']};
+  color: ${({ theme }) => theme.semantic.colors.text.inverse};
   animation: ${slideIn} ${({ theme }) => theme.transitions.normal};
 
   ${media.md} {
@@ -74,37 +74,37 @@ const Modal = styled.div`
 `;
 
 const ModalHeader = styled.div`
-  background: ${({ theme }) => theme.colors.primaryGradient};
-  padding: ${({ theme }) => theme.spacing.xl};
+  background: linear-gradient(135deg, ${({ theme }) => theme.colors.primary[600]}, ${({ theme }) => theme.colors.primary[700]});
+  padding: ${({ theme }) => theme.spacing[8]};
   display: flex;
   justify-content: space-between;
   align-items: center;
   position: relative;
 
   ${media.md} {
-    padding: ${({ theme }) => theme.spacing.lg};
+    padding: ${({ theme }) => theme.spacing[6]};
   }
 `;
 
 const ModalTitle = styled.h2`
   margin: 0;
-  font-size: ${({ theme }) => theme.fontSize['2xl']};
-  font-weight: ${({ theme }) => theme.fontWeight.semibold};
-  color: ${({ theme }) => theme.colors.text.white};
+  font-size: ${({ theme }) => theme.fontSizes['2xl']};
+  font-weight: ${({ theme }) => theme.fontWeights.semibold};
+  color: ${({ theme }) => theme.semantic.colors.text.inverse};
 
   ${media.md} {
-    font-size: ${({ theme }) => theme.fontSize.xl};
+    font-size: ${({ theme }) => theme.fontSizes.xl};
   }
 `;
 
 const CloseButton = styled.button`
   background: none;
   border: none;
-  color: ${({ theme }) => theme.colors.text.white};
-  font-size: ${({ theme }) => theme.fontSize.xl};
+  color: ${({ theme }) => theme.semantic.colors.text.inverse};
+  font-size: ${({ theme }) => theme.fontSizes.xl};
   cursor: pointer;
-  padding: ${({ theme }) => theme.spacing.xs};
-  border-radius: ${({ theme }) => theme.borderRadius.round};
+  padding: ${({ theme }) => theme.spacing[1]};
+  border-radius: ${({ theme }) => theme.borderRadius.full};
   width: 40px;
   height: 40px;
   display: flex;
@@ -118,7 +118,7 @@ const CloseButton = styled.button`
 `;
 
 const ModalContent = styled.div`
-  padding: ${({ theme }) => theme.spacing.xl};
+  padding: ${({ theme }) => theme.spacing[8]};
   max-height: 60vh;
   overflow-y: auto;
 
@@ -127,7 +127,7 @@ const ModalContent = styled.div`
   }
 
   &::-webkit-scrollbar-track {
-    background: ${({ theme }) => theme.colors.cart.background};
+    background: ${({ theme }) => theme.semantic.colors.surface.primary};
   }
 
   &::-webkit-scrollbar-thumb {
@@ -140,28 +140,28 @@ const ModalContent = styled.div`
   }
 
   ${media.md} {
-    padding: ${({ theme }) => theme.spacing.lg};
+    padding: ${({ theme }) => theme.spacing[6]};
   }
 `;
 
 const EmptyCart = styled.div`
   text-align: center;
-  padding: 40px ${({ theme }) => theme.spacing.xl};
-  color: ${({ theme }) => theme.colors.text.tertiary};
+  padding: 40px ${({ theme }) => theme.spacing[8]};
+  color: ${({ theme }) => theme.semantic.colors.text.tertiary};
 `;
 
 const CartItems = styled.div`
   display: flex;
   flex-direction: column;
-  gap: ${({ theme }) => theme.spacing.xl};
-  margin-bottom: ${({ theme }) => theme.spacing.xl};
+  gap: ${({ theme }) => theme.spacing[8]};
+  margin-bottom: ${({ theme }) => theme.spacing[8]};
 `;
 
 const CartItem = styled.div`
   display: flex;
-  gap: ${({ theme }) => theme.spacing.lg};
-  padding: ${({ theme }) => theme.spacing.lg};
-  background: ${({ theme }) => theme.colors.cart.item};
+  gap: ${({ theme }) => theme.spacing[6]};
+  padding: ${({ theme }) => theme.spacing[6]};
+  background: ${({ theme }) => theme.semantic.colors.surface.secondary};
   border-radius: ${({ theme }) => theme.borderRadius.md};
   position: relative;
 
@@ -198,11 +198,11 @@ const CartItemInfo = styled.div`
 `;
 
 const CartItemName = styled.h3`
-  font-size: ${({ theme }) => theme.fontSize.lg};
-  font-weight: ${({ theme }) => theme.fontWeight.semibold};
+  font-size: ${({ theme }) => theme.fontSizes.lg};
+  font-weight: ${({ theme }) => theme.fontWeights.semibold};
   margin: 0;
-  color: ${({ theme }) => theme.colors.text.white};
-  line-height: ${({ theme }) => theme.lineHeight.normal};
+  color: ${({ theme }) => theme.semantic.colors.text.inverse};
+  line-height: ${({ theme }) => theme.lineHeights.normal};
 `;
 
 const CartItemControls = styled.div`
@@ -217,7 +217,7 @@ const CartItemControls = styled.div`
 `;
 
 const QuantityLabel = styled.span`
-  font-size: ${({ theme }) => theme.fontSize.sm};
+  font-size: ${({ theme }) => theme.fontSizes.sm};
   color: #ccc;
   margin-right: 10px;
 `;
@@ -225,10 +225,10 @@ const QuantityLabel = styled.span`
 const QuantityControls = styled.div`
   display: flex;
   align-items: center;
-  gap: ${({ theme }) => theme.spacing.xs};
-  background: ${({ theme }) => theme.colors.cart.controls};
+  gap: ${({ theme }) => theme.spacing[1]};
+  background: ${({ theme }) => theme.semantic.colors.border.secondary};
   border-radius: ${({ theme }) => theme.borderRadius.sm};
-  padding: ${({ theme }) => theme.spacing.xs};
+  padding: ${({ theme }) => theme.spacing[1]};
 
   ${media.md} {
     order: 1;
@@ -238,16 +238,16 @@ const QuantityControls = styled.div`
 const QuantityButton = styled.button`
   background: none;
   border: none;
-  color: ${({ theme }) => theme.colors.text.white};
+  color: ${({ theme }) => theme.semantic.colors.text.inverse};
   width: 30px;
   height: 30px;
-  border-radius: ${({ theme }) => theme.borderRadius.round};
+  border-radius: ${({ theme }) => theme.borderRadius.full};
   display: flex;
   align-items: center;
   justify-content: center;
   cursor: pointer;
   transition: background-color ${({ theme }) => theme.transitions.fast};
-  font-size: ${({ theme }) => theme.fontSize.sm};
+  font-size: ${({ theme }) => theme.fontSizes.sm};
 
   &:hover {
     background: rgba(255, 255, 255, 0.1);
@@ -255,11 +255,11 @@ const QuantityButton = styled.button`
 `;
 
 const QuantityDisplay = styled.span`
-  background: ${({ theme }) => theme.colors.cart.display};
-  color: ${({ theme }) => theme.colors.text.white};
-  padding: ${({ theme }) => theme.spacing.xs} ${({ theme }) => theme.spacing.lg};
+  background: ${({ theme }) => theme.semantic.colors.surface.secondary};
+  color: ${({ theme }) => theme.semantic.colors.text.inverse};
+  padding: ${({ theme }) => theme.spacing[1]} ${({ theme }) => theme.spacing[6]};
   border-radius: ${({ theme }) => theme.borderRadius.sm};
-  font-weight: ${({ theme }) => theme.fontWeight.medium};
+  font-weight: ${({ theme }) => theme.fontWeights.medium};
   min-width: 40px;
   text-align: center;
 `;
@@ -267,9 +267,9 @@ const QuantityDisplay = styled.span`
 const RemoveButton = styled.button`
   background: none;
   border: none;
-  color: ${({ theme }) => theme.colors.cart.remove};
+  color: ${({ theme }) => theme.colors.error[600]};
   cursor: pointer;
-  padding: ${({ theme }) => theme.spacing.sm};
+  padding: ${({ theme }) => theme.spacing[2]};
   border-radius: ${({ theme }) => theme.borderRadius.sm};
   transition: background-color ${({ theme }) => theme.transitions.fast};
   margin-left: auto;
@@ -285,9 +285,9 @@ const RemoveButton = styled.button`
 `;
 
 const CartItemPrice = styled.div`
-  font-size: ${({ theme }) => theme.fontSize.xl};
-  font-weight: ${({ theme }) => theme.fontWeight.bold};
-  color: ${({ theme }) => theme.colors.cart.price};
+  font-size: ${({ theme }) => theme.fontSizes.xl};
+  font-weight: ${({ theme }) => theme.fontWeights.bold};
+  color: ${({ theme }) => theme.colors.primary[600]};
   margin-top: auto;
 `;
 
@@ -295,38 +295,38 @@ const CartTotal = styled.div`
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: ${({ theme }) => theme.spacing.xl} 0;
-  border-top: 1px solid ${({ theme }) => theme.colors.cart.controls};
-  margin-top: ${({ theme }) => theme.spacing.xl};
+  padding: ${({ theme }) => theme.spacing[8]} 0;
+  border-top: 1px solid ${({ theme }) => theme.semantic.colors.border.secondary};
+  margin-top: ${({ theme }) => theme.spacing[8]};
 `;
 
 const TotalLabel = styled.span`
-  font-size: ${({ theme }) => theme.fontSize['2xl']};
-  font-weight: ${({ theme }) => theme.fontWeight.semibold};
-  color: ${({ theme }) => theme.colors.text.white};
+  font-size: ${({ theme }) => theme.fontSizes['2xl']};
+  font-weight: ${({ theme }) => theme.fontWeights.semibold};
+  color: ${({ theme }) => theme.semantic.colors.text.inverse};
 `;
 
 const TotalPrice = styled.span`
-  font-size: ${({ theme }) => theme.fontSize['3xl']};
-  font-weight: ${({ theme }) => theme.fontWeight.bold};
-  color: ${({ theme }) => theme.colors.cart.price};
+  font-size: ${({ theme }) => theme.fontSizes['3xl']};
+  font-weight: ${({ theme }) => theme.fontWeights.bold};
+  color: ${({ theme }) => theme.colors.primary[600]};
 `;
 
 const FinalizeButton = styled.button`
   width: 100%;
-  padding: ${({ theme }) => theme.spacing.lg};
-  background: ${({ theme }) => theme.colors.primaryGradient};
-  color: ${({ theme }) => theme.colors.text.white};
+  padding: ${({ theme }) => theme.spacing[6]};
+  background: linear-gradient(135deg, ${({ theme }) => theme.colors.primary[600]}, ${({ theme }) => theme.colors.primary[700]});
+  color: ${({ theme }) => theme.semantic.colors.text.inverse};
   border: none;
   border-radius: ${({ theme }) => theme.borderRadius.md};
-  font-size: ${({ theme }) => theme.fontSize.lg};
-  font-weight: ${({ theme }) => theme.fontWeight.semibold};
+  font-size: ${({ theme }) => theme.fontSizes.lg};
+  font-weight: ${({ theme }) => theme.fontWeights.semibold};
   cursor: pointer;
   transition: all ${({ theme }) => theme.transitions.fast};
   margin-top: 10px;
 
   &:hover {
-    background: ${({ theme }) => theme.colors.primaryGradientHover};
+    background: linear-gradient(135deg, ${({ theme }) => theme.colors.primary[700]}, ${({ theme }) => theme.colors.primary[800]});
     transform: translateY(-1px);
     box-shadow: ${({ theme }) => theme.shadows.primary};
   }

@@ -20,28 +20,28 @@ const pulse = keyframes`
 `;
 
 const StyledHeader = styled.header`
-  background-color: ${({ theme }) => theme.colors.background.white};
+  background-color: ${({ theme }) => theme.semantic.colors.background.primary};
   box-shadow: ${({ theme }) => theme.shadows.sm};
 `;
 
 const HeaderTop = styled.div`
-  padding: ${({ theme }) => theme.spacing.md} 0;
-  border-bottom: 1px solid ${({ theme }) => theme.colors.border.light};
+  padding: ${({ theme }) => theme.spacing[4]} 0;
+  border-bottom: 1px solid ${({ theme }) => theme.semantic.colors.border.primary};
 `;
 
 const Container = styled.div`
   max-width: 1200px;
   margin: 0 auto;
-  padding: 0 ${({ theme }) => theme.spacing.md};
+  padding: 0 ${({ theme }) => theme.spacing[4]};
   display: flex;
   align-items: center;
   justify-content: space-between;
 `;
 
 const Logo = styled.div`
-  font-size: ${({ theme }) => theme.fontSize.base};
-  font-weight: ${({ theme }) => theme.fontWeight.bold};
-  color: ${({ theme }) => theme.colors.text.primary};
+  font-size: ${({ theme }) => theme.fontSizes.base};
+  font-weight: ${({ theme }) => theme.fontWeights.bold};
+  color: ${({ theme }) => theme.semantic.colors.text.primary};
   margin: 0;
   letter-spacing: 0.5px;
 `;
@@ -54,16 +54,16 @@ const FooterLink = styled(Link)`
 const SearchBar = styled.div`
   flex: 2;
   max-width: 400px;
-  margin: 0 ${({ theme }) => theme.spacing.xl};
+  margin: 0 ${({ theme }) => theme.spacing[8]};
   position: relative;
 `;
 
 const SearchInput = styled.input`
   width: 100%;
-  padding: 0.75rem ${({ theme }) => theme.spacing.md};
-  border: 1px solid ${({ theme }) => theme.colors.border.medium};
-  border-radius: ${({ theme }) => theme.borderRadius.pill};
-  font-size: ${({ theme }) => theme.fontSize.base};
+  padding: 0.75rem ${({ theme }) => theme.spacing[4]};
+  border: 1px solid ${({ theme }) => theme.semantic.colors.border.secondary};
+  border-radius: ${({ theme }) => theme.borderRadius.full};
+  font-size: ${({ theme }) => theme.fontSizes.base};
   outline: none;
   transition: border-color ${({ theme }) => theme.transitions.normal};
   padding-right: 80px;
@@ -73,7 +73,7 @@ const SearchInput = styled.input`
   }
 
   &::placeholder {
-    color: ${({ theme }) => theme.colors.text.tertiary};
+    color: ${({ theme }) => theme.semantic.colors.text.tertiary};
   }
 `;
 
@@ -85,16 +85,16 @@ const SearchButton = styled.button`
   background: none;
   border: none;
   cursor: pointer;
-  padding: ${({ theme }) => theme.spacing.sm};
-  border-radius: ${({ theme }) => theme.borderRadius.round};
-  color: ${({ theme }) => theme.colors.text.secondary};
+  padding: ${({ theme }) => theme.spacing[2]};
+  border-radius: ${({ theme }) => theme.borderRadius.full};
+  color: ${({ theme }) => theme.semantic.colors.text.secondary};
   display: flex;
   align-items: center;
   justify-content: center;
   transition: background-color ${({ theme }) => theme.transitions.normal};
 
   &:hover {
-    background-color: ${({ theme }) => theme.colors.button.hover};
+    background-color: ${({ theme }) => theme.semantic.colors.background.secondary};
   }
 `;
 
@@ -106,9 +106,9 @@ const ClearSearchButton = styled.button`
   background: none;
   border: none;
   cursor: pointer;
-  padding: ${({ theme }) => theme.spacing.sm};
-  border-radius: ${({ theme }) => theme.borderRadius.round};
-  color: ${({ theme }) => theme.colors.text.tertiary};
+  padding: ${({ theme }) => theme.spacing[2]};
+  border-radius: ${({ theme }) => theme.borderRadius.full};
+  color: ${({ theme }) => theme.semantic.colors.text.tertiary};
   display: flex;
   align-items: center;
   justify-content: center;
@@ -116,24 +116,24 @@ const ClearSearchButton = styled.button`
   z-index: 1;
 
   &:hover {
-    background-color: ${({ theme }) => theme.colors.button.hover};
-    color: ${({ theme }) => theme.colors.text.secondary};
+    background-color: ${({ theme }) => theme.semantic.colors.background.secondary};
+    color: ${({ theme }) => theme.semantic.colors.text.secondary};
   }
 `;
 
 const HeaderActions = styled.div`
   display: flex;
   align-items: center;
-  gap: ${({ theme }) => theme.spacing.md};
+  gap: ${({ theme }) => theme.spacing[4]};
 `;
 
 const CartButton = styled.button`
   background: none;
   border: none;
   cursor: pointer;
-  padding: ${({ theme }) => theme.spacing.sm};
-  border-radius: ${({ theme }) => theme.borderRadius.round};
-  color: ${({ theme }) => theme.colors.text.primary};
+  padding: ${({ theme }) => theme.spacing[2]};
+  border-radius: ${({ theme }) => theme.borderRadius.full};
+  color: ${({ theme }) => theme.semantic.colors.text.primary};
   display: flex;
   align-items: center;
   justify-content: center;
@@ -141,7 +141,7 @@ const CartButton = styled.button`
   position: relative;
 
   &:hover {
-    background-color: ${({ theme }) => theme.colors.button.hover};
+    background-color: ${({ theme }) => theme.semantic.colors.background.secondary};
   }
 `;
 
@@ -149,22 +149,22 @@ const CartBadge = styled.span`
   position: absolute;
   top: -5px;
   right: -5px;
-  background: ${({ theme }) => theme.colors.primaryGradient};
-  color: ${({ theme }) => theme.colors.text.white};
-  border-radius: ${({ theme }) => theme.borderRadius.round};
+  background: linear-gradient(135deg, ${({ theme }) => theme.colors.primary[600]}, ${({ theme }) => theme.colors.primary[700]});
+  color: ${({ theme }) => theme.semantic.colors.text.inverse};
+  border-radius: ${({ theme }) => theme.borderRadius.full};
   width: 18px;
   height: 18px;
   display: flex;
   align-items: center;
   justify-content: center;
-  font-size: ${({ theme }) => theme.fontSize.xs};
-  font-weight: ${({ theme }) => theme.fontWeight.semibold};
+  font-size: ${({ theme }) => theme.fontSizes.xs};
+  font-weight: ${({ theme }) => theme.fontWeights.semibold};
   min-width: 18px;
   animation: ${pulse} 2s infinite;
 `;
 
 const HeaderNav = styled.nav`
-  background-color: ${({ theme }) => theme.colors.background.light};
+  background-color: ${({ theme }) => theme.semantic.colors.background.secondary};
   padding: 0.75rem 0;
 `;
 
@@ -173,13 +173,13 @@ const NavMenu = styled.ul`
   margin: 0;
   padding: 0;
   display: flex;
-  gap: ${({ theme }) => theme.spacing.xl};
+  gap: ${({ theme }) => theme.spacing[8]};
 
   li a {
     text-decoration: none;
-    color: ${({ theme }) => theme.colors.text.secondary};
-    font-size: ${({ theme }) => theme.fontSize.sm};
-    font-weight: ${({ theme }) => theme.fontWeight.medium};
+    color: ${({ theme }) => theme.semantic.colors.text.secondary};
+    font-size: ${({ theme }) => theme.fontSizes.sm};
+    font-weight: ${({ theme }) => theme.fontWeights.medium};
     transition: color ${({ theme }) => theme.transitions.normal};
 
     &:hover {
@@ -189,12 +189,12 @@ const NavMenu = styled.ul`
 `;
 
 const PromoBadge = styled.div`
-  background-color: ${({ theme }) => theme.colors.promo};
-  color: ${({ theme }) => theme.colors.text.white};
-  padding: ${({ theme }) => theme.spacing.sm} ${({ theme }) => theme.spacing.md};
-  border-radius: ${({ theme }) => theme.borderRadius.xxl};
-  font-size: ${({ theme }) => theme.fontSize.sm};
-  font-weight: ${({ theme }) => theme.fontWeight.medium};
+  background-color: ${({ theme }) => theme.colors.primary[600]};
+  color: ${({ theme }) => theme.semantic.colors.text.inverse};
+  padding: ${({ theme }) => theme.spacing[2]} ${({ theme }) => theme.spacing[4]};
+  border-radius: ${({ theme }) => theme.borderRadius['2xl']};
+  font-size: ${({ theme }) => theme.fontSizes.sm};
+  font-weight: ${({ theme }) => theme.fontWeights.medium};
   white-space: nowrap;
 `;
 

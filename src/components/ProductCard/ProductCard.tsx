@@ -10,7 +10,7 @@ interface ProductCardProps {
 }
 
 const StyledProductCard = styled.a`
-  background: ${({ theme }) => theme.colors.background.card};
+  background: ${({ theme }) => theme.semantic.colors.surface.primary};
   border-radius: ${({ theme }) => theme.borderRadius.lg};
   overflow: hidden;
   box-shadow: ${({ theme }) => theme.shadows.md};
@@ -18,7 +18,7 @@ const StyledProductCard = styled.a`
   cursor: pointer;
   width: 100%;
   max-width: 300px;
-  border: 1px solid ${({ theme }) => theme.colors.border.dark};
+  border: 1px solid ${({ theme }) => theme.semantic.colors.border.primary};
   padding: 0;
   text-align: left;
   font-family: inherit;
@@ -31,7 +31,7 @@ const StyledProductCard = styled.a`
   }
 
   &:focus {
-    outline: 2px solid ${({ theme }) => theme.colors.primary};
+    outline: 2px solid ${({ theme }) => theme.colors.primary[600]};
     outline-offset: 2px;
   }
 `;
@@ -53,30 +53,30 @@ const ProductImage = styled.div`
 `;
 
 const ProductInfo = styled.div`
-  padding: ${({ theme }) => theme.spacing.xl};
+  padding: ${({ theme }) => theme.spacing[8]};
 
   ${media.md} {
-    padding: ${({ theme }) => theme.spacing.md};
+    padding: ${({ theme }) => theme.spacing[4]};
   }
 `;
 
 const ProductName = styled.h3`
-  font-size: ${({ theme }) => theme.fontSize.base};
-  font-weight: ${({ theme }) => theme.fontWeight.semibold};
-  color: ${({ theme }) => theme.colors.text.primary};
-  margin: 0 0 ${({ theme }) => theme.spacing.sm} 0;
-  line-height: ${({ theme }) => theme.lineHeight.normal};
+  font-size: ${({ theme }) => theme.fontSizes.base};
+  font-weight: ${({ theme }) => theme.fontWeights.semibold};
+  color: ${({ theme }) => theme.semantic.colors.text.primary};
+  margin: 0 0 ${({ theme }) => theme.spacing[2]} 0;
+  line-height: ${({ theme }) => theme.lineHeights.normal};
 
   ${media.md} {
-    font-size: ${({ theme }) => theme.fontSize.sm};
+    font-size: ${({ theme }) => theme.fontSizes.sm};
   }
 `;
 
 const ProductDescription = styled.p`
-  font-size: ${({ theme }) => theme.fontSize.sm};
-  color: ${({ theme }) => theme.colors.text.secondary};
-  margin: 0 0 ${({ theme }) => theme.spacing.md} 0;
-  line-height: ${({ theme }) => theme.lineHeight.relaxed};
+  font-size: ${({ theme }) => theme.fontSizes.sm};
+  color: ${({ theme }) => theme.semantic.colors.text.secondary};
+  margin: 0 0 ${({ theme }) => theme.spacing[4]} 0;
+  line-height: ${({ theme }) => theme.lineHeights.relaxed};
   display: -webkit-box;
   -webkit-line-clamp: 2;
   line-clamp: 2;
@@ -84,32 +84,32 @@ const ProductDescription = styled.p`
   overflow: hidden;
 
   ${media.md} {
-    font-size: ${({ theme }) => theme.fontSize.xs};
+    font-size: ${({ theme }) => theme.fontSizes.xs};
   }
 `;
 
 const ProductTags = styled.div`
   display: flex;
-  gap: ${({ theme }) => theme.spacing.sm};
-  margin-bottom: ${({ theme }) => theme.spacing.md};
+  gap: ${({ theme }) => theme.spacing[2]};
+  margin-bottom: ${({ theme }) => theme.spacing[4]};
   flex-wrap: wrap;
 `;
 
 const ProductTag = styled.span<{ tagType: 'protection' | 'face' }>`
-  padding: ${({ theme }) => theme.spacing.xs} ${({ theme }) => theme.spacing.lg};
+  padding: ${({ theme }) => theme.spacing[1]} ${({ theme }) => theme.spacing[6]};
   border-radius: ${({ theme }) => theme.borderRadius.xl};
-  font-size: ${({ theme }) => theme.fontSize.xs};
-  font-weight: ${({ theme }) => theme.fontWeight.semibold};
+  font-size: ${({ theme }) => theme.fontSizes.xs};
+  font-weight: ${({ theme }) => theme.fontWeights.semibold};
   text-transform: uppercase;
   letter-spacing: 0.5px;
   background-color: ${({ theme, tagType }) => 
     tagType === 'protection' 
-      ? theme.colors.tag.protection.bg 
-      : theme.colors.tag.face.bg};
+      ? theme.colors.primary[100] 
+      : theme.colors.secondary[100]};
   color: ${({ theme, tagType }) => 
     tagType === 'protection' 
-      ? theme.colors.tag.protection.text 
-      : theme.colors.tag.face.text};
+      ? theme.colors.primary[800] 
+      : theme.colors.secondary[800]};
 `;
 
 const ProductFooter = styled.div`
@@ -119,35 +119,35 @@ const ProductFooter = styled.div`
 
   ${media.sm} {
     flex-direction: column;
-    gap: ${({ theme }) => theme.spacing.lg};
+    gap: ${({ theme }) => theme.spacing[6]};
     align-items: stretch;
   }
 `;
 
 const ProductPrice = styled.span`
-  font-size: ${({ theme }) => theme.fontSize.lg};
-  font-weight: ${({ theme }) => theme.fontWeight.bold};
-  color: ${({ theme }) => theme.colors.text.primary};
+  font-size: ${({ theme }) => theme.fontSizes.lg};
+  font-weight: ${({ theme }) => theme.fontWeights.bold};
+  color: ${({ theme }) => theme.semantic.colors.text.primary};
 
   ${media.md} {
-    font-size: ${({ theme }) => theme.fontSize.base};
+    font-size: ${({ theme }) => theme.fontSizes.base};
   }
 `;
 
 const ProductBuyButton = styled.button`
-  background: ${({ theme }) => theme.colors.primaryGradient};
-  color: ${({ theme }) => theme.colors.text.white};
+  background: linear-gradient(135deg, ${({ theme }) => theme.colors.primary[600]}, ${({ theme }) => theme.colors.primary[700]});
+  color: ${({ theme }) => theme.semantic.colors.text.inverse};
   border: none;
-  padding: 10px ${({ theme }) => theme.spacing.xl};
-  border-radius: ${({ theme }) => theme.borderRadius.xxl};
-  font-size: ${({ theme }) => theme.fontSize.sm};
-  font-weight: ${({ theme }) => theme.fontWeight.semibold};
+  padding: 10px ${({ theme }) => theme.spacing[8]};
+  border-radius: ${({ theme }) => theme.borderRadius['2xl']};
+  font-size: ${({ theme }) => theme.fontSizes.sm};
+  font-weight: ${({ theme }) => theme.fontWeights.semibold};
   cursor: pointer;
   transition: all ${({ theme }) => theme.transitions.normal};
   text-transform: lowercase;
 
   &:hover {
-    background: ${({ theme }) => theme.colors.primaryGradientHover};
+    background: linear-gradient(135deg, ${({ theme }) => theme.colors.primary[700]}, ${({ theme }) => theme.colors.primary[800]});
     transform: translateY(-1px);
     box-shadow: ${({ theme }) => theme.shadows.primary};
   }
@@ -157,13 +157,13 @@ const ProductBuyButton = styled.button`
   }
 
   &:focus {
-    outline: 2px solid ${({ theme }) => theme.colors.primary};
+    outline: 2px solid ${({ theme }) => theme.colors.primary[600]};
     outline-offset: 2px;
   }
 
   ${media.md} {
-    padding: ${({ theme }) => theme.spacing.sm} ${({ theme }) => theme.spacing.md};
-    font-size: ${({ theme }) => theme.fontSize.xs};
+    padding: ${({ theme }) => theme.spacing[2]} ${({ theme }) => theme.spacing[4]};
+    font-size: ${({ theme }) => theme.fontSizes.xs};
   }
 
   ${media.sm} {
