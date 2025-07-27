@@ -37,7 +37,7 @@ const ProductCard: React.FC<ProductCardProps> = ({
           {product.tags.map((tag, index) => (
             <ProductTag 
               key={`${product.id}-tag-${index}-${tag.label || 'no-label'}-${tag.type || 'no-type'}`}
-              tagType={tag.type}
+              tagtype={tag.type}
             >
               {tag.label}
             </ProductTag>
@@ -149,18 +149,18 @@ const ProductTags = styled.div`
   flex-wrap: wrap;
 `;
 
-const ProductTag = styled.span<{ tagType: 'protection' | 'face' }>`
+const ProductTag = styled.span<{ tagtype: 'protection' | 'face' }>`
   padding: ${({ theme }) => theme.spacing.xs} ${({ theme }) => theme.spacing.lg};
   border-radius: ${({ theme }) => theme.borderRadius.xl};
   font-size: ${({ theme }) => theme.fontSize.xs};
   font-weight: ${({ theme }) => theme.fontWeight.semibold};
   text-transform: uppercase;
   letter-spacing: 0.5px;
-  background-color: ${({ theme, tagType }) => 
+  background-color: ${({ theme, tagtype: tagType }) => 
     tagType === 'protection' 
       ? theme.colors.tag.protection.bg 
       : theme.colors.tag.face.bg};
-  color: ${({ theme, tagType }) => 
+  color: ${({ theme, tagtype: tagType }) => 
     tagType === 'protection' 
       ? theme.colors.tag.protection.text 
       : theme.colors.tag.face.text};

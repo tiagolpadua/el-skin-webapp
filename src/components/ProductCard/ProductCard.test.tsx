@@ -1,7 +1,9 @@
 import { render, screen, fireEvent } from '@testing-library/react';
 import '@testing-library/jest-dom';
+import { ThemeProvider } from 'styled-components';
 import ProductCard from './ProductCard';
 import { IProduct } from '../../services';
+import { theme } from '../../styles/theme';
 
 const mockProduct: IProduct = {
   id: '1',
@@ -21,13 +23,21 @@ const mockProps = {
   onBuyClick: jest.fn(),
 };
 
+const renderWithTheme = (component: React.ReactElement) => {
+  return render(
+    <ThemeProvider theme={theme}>
+      {component}
+    </ThemeProvider>
+  );
+};
+
 describe('ProductCard', () => {
   beforeEach(() => {
     jest.clearAllMocks();
   });
 
   it('should render product information correctly', () => {
-    render(<ProductCard {...mockProps} />);
+    renderWithTheme(<ProductCard {...mockProps} />);
     
     expect(screen.getByText('Teste Produto')).toBeInTheDocument();
     expect(screen.getByText('Descrição do produto teste')).toBeInTheDocument();
@@ -35,7 +45,7 @@ describe('ProductCard', () => {
   });
 
   it('should render product image with correct attributes', () => {
-    render(<ProductCard {...mockProps} />);
+    renderWithTheme(<ProductCard {...mockProps} />);
     
     const image = screen.getByAltText('Teste Produto');
     expect(image).toBeInTheDocument();
@@ -43,7 +53,7 @@ describe('ProductCard', () => {
   });
 
   it('should call onProductClick when card is clicked', () => {
-    render(<ProductCard {...mockProps} />);
+    renderWithTheme(<ProductCard {...mockProps} />);
     
     const card = screen.getByTestId('product-card');
     fireEvent.click(card);
@@ -53,7 +63,7 @@ describe('ProductCard', () => {
   });
 
   it('should call onBuyClick when buy button is clicked', () => {
-    render(<ProductCard {...mockProps} />);
+    renderWithTheme(<ProductCard {...mockProps} />);
     
     const buyButton = screen.getByRole('button', { name: /comprar/i });
     fireEvent.click(buyButton);
@@ -63,7 +73,7 @@ describe('ProductCard', () => {
   });
 
   // it('should stop propagation when buy button is clicked', () => {
-  //   render(<ProductCard {...mockProps} />);
+  //   renderWithTheme(<ProductCard {...mockProps} />);
     
   //   const buyButton = screen.getByRole('button', { name: /comprar/i });
   //   const mockEvent = { stopPropagation: jest.fn() };
@@ -80,7 +90,7 @@ describe('ProductCard', () => {
       price: 1234.56
     };
     
-    render(<ProductCard {...mockProps} product={productWithDifferentPrice} />);
+    renderWithTheme(<ProductCard {...mockProps} product={productWithDifferentPrice} />);
     
     expect(screen.getByText('R$ 1234,56')).toBeInTheDocument();
   });
@@ -91,7 +101,7 @@ describe('ProductCard', () => {
       price: 100
     };
     
-    render(<ProductCard {...mockProps} product={productWithWholePrice} />);
+    renderWithTheme(<ProductCard {...mockProps} product={productWithWholePrice} />);
     
     expect(screen.getByText('R$ 100,00')).toBeInTheDocument();
   });

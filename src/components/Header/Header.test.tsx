@@ -1,18 +1,22 @@
 import { render, screen, fireEvent } from '@testing-library/react';
 import '@testing-library/jest-dom';
 import { BrowserRouter } from 'react-router-dom';
+import { ThemeProvider } from 'styled-components';
 import Header from './Header';
 import { CartProvider } from '../../context/CartContext';
 import { SearchProvider } from '../../context/SearchContext';
+import { theme } from '../../styles/theme';
 
 const renderWithProviders = () => {
   return render(
     <BrowserRouter>
-      <SearchProvider>
-        <CartProvider>
-          <Header />
-        </CartProvider>
-      </SearchProvider>
+      <ThemeProvider theme={theme}>
+        <SearchProvider>
+          <CartProvider>
+            <Header />
+          </CartProvider>
+        </SearchProvider>
+      </ThemeProvider>
     </BrowserRouter>
   );
 };

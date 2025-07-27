@@ -1,8 +1,10 @@
 import { render, screen, fireEvent, waitFor, act } from '@testing-library/react';
 import '@testing-library/jest-dom';
+import { ThemeProvider } from 'styled-components';
 import ProductGrid from './ProductGrid';
 import { CartProvider } from '../../context/CartContext';
 import { productService } from '../../services';
+import { theme } from '../../styles/theme';
 
 // Mock dos serviços
 jest.mock('../../services', () => ({
@@ -47,9 +49,11 @@ const renderWithProviders = async () => {
   let component;
   await act(async () => {
     component = render(
-      <CartProvider>
-        <ProductGrid />
-      </CartProvider>
+      <ThemeProvider theme={theme}>
+        <CartProvider>
+          <ProductGrid />
+        </CartProvider>
+      </ThemeProvider>
     );
   });
   return component;
@@ -112,10 +116,8 @@ describe('ProductGrid', () => {
       expect(screen.getByText('Produto 1')).toBeInTheDocument();
     });
     
-    const productCard = screen.getByText('Produto 1').closest('.product-card');
-    if (productCard) {
-      fireEvent.click(productCard);
-    }
+    const productCards = screen.getAllByTestId('product-card');
+    fireEvent.click(productCards[0]); // Click no primeiro produto
     
     expect(consoleSpy).toHaveBeenCalledWith('Produto clicado: 1');
     consoleSpy.mockRestore();
