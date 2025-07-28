@@ -1,8 +1,7 @@
-import { fireEvent, render, screen } from '@testing-library/react';
 import '@testing-library/jest-dom';
-import ProductCard from './ProductCard';
+import { fireEvent, render, screen } from '@testing-library/react';
 import { IProduct } from '../../service/productService';
-import About from '../../pages/About/About';
+import ProductCard from './ProductCard';
 
 const product: IProduct = {
   id: '1',
@@ -46,4 +45,19 @@ test('deve acionar o método onProductClick quando o produto for clicado', () =>
 
   expect(handleProductClick).toBeCalledWith('1');
   expect(handleProductClick).toHaveBeenCalledTimes(1);
+});
+
+test('deve acionar o método onBuyClick quando o botão comprar for clicado', () => {
+  render(<ProductCard
+    key={product.id}
+    product={product}
+    onProductClick={handleProductClick}
+    onBuyClick={handleBuyClick}
+  />);
+
+  const card = screen.getByTestId('buy-button');
+  fireEvent.click(card);
+
+  expect(handleBuyClick).toBeCalledWith('1', expect.any(Object));
+  expect(handleBuyClick).toHaveBeenCalledTimes(1);
 });

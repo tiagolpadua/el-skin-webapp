@@ -1,0 +1,100 @@
+import '@testing-library/jest-dom';
+import { act, render, screen } from '@testing-library/react';
+import ProductGrid from './ProductGrid';
+
+const mockProducts = [
+  {
+    id: '1',
+    name: 'Produto 1',
+    description: 'Descrição do produto 1',
+    price: 99.99,
+    image: '/image1.jpg',
+    tags: [{ label: 'Proteção', type: 'protection' as const }]
+  },
+  {
+    id: '2',
+    name: 'Produto 2',
+    description: 'Descrição do produto 2',
+    price: 149.99,
+    image: '/image2.jpg',
+    tags: [{ label: 'Rosto', type: 'face' as const }]
+  }
+];
+
+// Mock dos serviços
+jest.mock('../../service/productService', () => ({
+  productService: {
+    getProducts: () => mockProducts,
+  },
+}));
+
+// Mock do SearchContext para controlar o termo de busca
+let mockSearchTerm = '';
+
+const mockAddItem = jest.fn();
+
+jest.mock('../../context/SearchContext', () => ({
+  useSearchContext: () => ({
+    search: mockSearchTerm,
+  }),
+}));
+
+jest.mock('../../context/CartContext', () => ({
+  useCartContext: () => ({
+    addItem: mockAddItem
+  }),
+}));
+
+const renderWithAct = async () => {
+  let component;
+  await act(async () => {
+    component = render(<ProductGrid />);
+  });
+  return component;
+};
+
+test('componente ProductGrid deve ser renderizado', async () => {
+  await renderWithAct();
+
+  expect(screen.getByText('nossos queridinhos estão aqui')).toBeInTheDocument();
+});
+
+test('deve exibir produtos corretamente', async () => {
+  await renderWithAct();
+
+  expect(screen.getByText('Produto 1')).toBeInTheDocument();
+  expect(screen.getByText('Descrição do produto 1')).toBeInTheDocument();
+  expect(screen.getByText('R$ 99,99')).toBeInTheDocument();
+
+  expect(screen.getByText('Produto 2')).toBeInTheDocument();
+  expect(screen.getByText('Descrição do produto 2')).toBeInTheDocument();
+  expect(screen.getByText('R$ 149,99')).toBeInTheDocument();
+});
+
+test('Deve chamar console.log ao clicar no produto', async () => {
+  const consoleSpy = jest.spyOn(console, 'log').mockImplementation(() => undefined);
+
+  await renderWithAct();
+
+  const productCard = screen.getByText('Produto 1');
+  productCard.click();
+
+  expect(consoleSpy).toHaveBeenCalledWith('Produto clicado: 1');
+
+  consoleSpy.mockRestore();
+});
+
+test('Deve chamar addItem ao clicar no botão comprar', async () => {
+  await renderWithAct();
+  const buyButtons = screen.getAllByTestId('buy-button');
+  buyButtons[0].click();
+  expect(mockAddItem).toHaveBeenCalledTimes(1);
+});
+
+test('Deve filtrar produtos com base no termo de busca', async () => {
+  mockSearchTerm = 'Produto 1';
+  await renderWithAct();
+
+  expect(screen.getByText('Produto 1')).toBeInTheDocument();
+  expect(screen.queryByText('Produto 2')).not.toBeInTheDocument();
+});

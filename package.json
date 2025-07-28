@@ -59,5 +59,10 @@
     "eslint-plugin-react": "^7.37.5",
     "globals": "^16.3.0",
     "typescript-eslint": "^8.36.0"
+  },
+    "jest": {
+    "moduleNameMapper": {
+      "axios": "axios/dist/axios.min.js"
+    }
   }
 }

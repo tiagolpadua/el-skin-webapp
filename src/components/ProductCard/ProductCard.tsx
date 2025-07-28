@@ -48,7 +48,8 @@ const ProductCard: React.FC<ProductCardProps> = ({
           <span className="product-price">
             {formatPrice(product.price)}
           </span>
-          <button 
+          <button
+            data-testid="buy-button"
             className="product-buy-button"
             onClick={(e) => onBuyClick(product.id, e)}
             type="button"
