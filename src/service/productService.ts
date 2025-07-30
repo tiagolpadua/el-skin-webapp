@@ -7,7 +7,7 @@ export interface IProduct {
   description: string;
   price: number;
   image: string;
-  tags: Array<{
+  tags?: Array<{
     label: string;
     type: 'protection' | 'face';
   }>;

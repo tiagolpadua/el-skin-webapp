@@ -5,6 +5,15 @@ import { useSearchContext } from '../../context/SearchContext';
 import './Header.css';
 import CartModal from '../CartModal/CartModal';
 import { useCartContext } from '../../context/CartContext';
+import styled from 'styled-components';
+
+const Logo = styled.span`
+  font-size: 16px;
+  font-weight: bold;
+  color: #333;
+  margin: 0;
+  letter-spacing: 0.5px;
+`;
 
 function Header() {
   const { search, setSearch } = useSearchContext();
@@ -31,10 +40,9 @@ function Header() {
     <header className="header">
       <div className="header-top">
         <div className="container">
-
-          <div className="logo">
-            <span>AL SKIN</span>
-          </div>
+          <Logo>
+            AL SKIN
+          </Logo>
 
           <div className="search-bar">
             <input 

@@ -21,6 +21,7 @@
     "react-dom": "^19.1.0",
     "react-router-dom": "^6.2.1",
     "react-scripts": "5.0.1",
+    "styled-components": "^6.1.19",
     "typescript": "^4.9.5",
     "web-vitals": "^2.1.4"
   },
@@ -60,7 +61,7 @@
     "globals": "^16.3.0",
     "typescript-eslint": "^8.36.0"
   },
-    "jest": {
+  "jest": {
     "moduleNameMapper": {
       "axios": "axios/dist/axios.min.js"
     }
