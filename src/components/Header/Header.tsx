@@ -4,20 +4,20 @@ import React, { useState } from 'react';
 import { useSearchContext } from '../../context/SearchContext';
 import './Header.css';
 import CartModal from '../CartModal/CartModal';
-import { useCartContext } from '../../context/CartContext';
+// import { useCartContext } from '../../context/CartContext';
 import styled from 'styled-components';
 
-const Logo = styled.span`
-  font-size: 16px;
-  font-weight: bold;
-  color: #333;
+const Logo = styled.div`
+  font-size: ${({ theme }) => theme.fontSize.base};
+  font-weight: ${({ theme }) => theme.fontWeight.bold};
+  color: ${({ theme }) => theme.colors.text.primary};
   margin: 0;
   letter-spacing: 0.5px;
 `;
 
 function Header() {
   const { search, setSearch } = useSearchContext();
-  const { items } = useCartContext();
+  // const { items } = useCartContext();
   const [isCartModalOpen, setIsCartModalOpen] = useState(false);
   
   const handleCloseCart = () => {
