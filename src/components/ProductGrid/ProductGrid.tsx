@@ -1,37 +1,25 @@
 
-import { useCallback, useEffect, useState } from 'react';
+import { useCallback, useMemo } from 'react';
 import { useCart } from '../../hooks/useCart';
 import { useSearch } from '../../hooks/useSearch';
-import { IProduct, productService } from '../../service/productService';
+import { useGetProductsQuery } from '../../store/api/apiSlice';
 import ProductCard from '../ProductCard/ProductCard';
 import './ProductGrid.css';
 
 function ProductGrid() {
   const title = 'nossos queridinhos estão aqui';
-  const [products, setProducts] = useState<IProduct[]>([]);
-  const [filteredProducts, setFilteredProducts] = useState<IProduct[]>([]);
   
   const { search } = useSearch();
   const { addItem } = useCart();
+  const { data: products = [], isLoading, error } = useGetProductsQuery();
 
-  useEffect(() => {
-    const fetchProducts = async () => {
-      const products = await productService.getProducts();
-      setProducts(products);
-    };
-
-    fetchProducts();
-  }, []);
-
-  useEffect(() => {
-    if (search) {
-      setFilteredProducts(products.filter(product =>
-        product.name.toLowerCase().includes(search.toLowerCase()) ||
-        product.description.toLowerCase().includes(search.toLowerCase())
-      ));
-    } else {
-      setFilteredProducts([...products]);
-    }
+  const filteredProducts = useMemo(() => {
+    if (!search) return products;
+    
+    return products.filter(product =>
+      product.name.toLowerCase().includes(search.toLowerCase()) ||
+      product.description.toLowerCase().includes(search.toLowerCase())
+    );
   }, [search, products]);
 
   const handleProductClick = (productId: string) => {
@@ -52,10 +40,35 @@ function ProductGrid() {
     addItem(produtoComprado);
   }, [products, addItem]);
 
+  if (isLoading) {
+    return (
+      <section className="product-grid-section">
+        <div className="product-grid-container">
+          <h2 className="product-grid-title">{title}</h2>
+          <div className="product-grid">
+            <p>Carregando produtos...</p>
+          </div>
+        </div>
+      </section>
+    );
+  }
+
+  if (error) {
+    return (
+      <section className="product-grid-section">
+        <div className="product-grid-container">
+          <h2 className="product-grid-title">{title}</h2>
+          <div className="product-grid">
+            <p>Erro ao carregar produtos. Tente novamente.</p>
+          </div>
+        </div>
+      </section>
+    );
+  }
+
   return (
     <section className="product-grid-section">
       <div className="product-grid-container">
-
         <h2 className="product-grid-title">{title}</h2>
         
         <div className="product-grid">

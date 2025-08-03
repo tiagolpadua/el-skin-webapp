@@ -1,21 +1,13 @@
 import React from 'react';
 import './ProductCard.css';
-import { IProduct } from '../../service/productService';
 import styled from 'styled-components';
+import { IProduct } from '../../store/api/apiSlice';
 
 interface ProductCardProps {
   product: IProduct;
   onProductClick: (productId: string) => void;
   onBuyClick: (productId: string, event: React.MouseEvent) => void;
 }
-
-/* </span>
-              <span 
-    key={`${product.id}-${tag.label || idx}-${tag.type || idx}`}
-    className={`product-tag product-tag--${tag.type}`}
-  >
-    {tag.label}
-  </span> */
 
 const ProductCard: React.FC<ProductCardProps> = ({
   product,
