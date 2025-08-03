@@ -1,5 +1,5 @@
-import { createSlice, createAsyncThunk, PayloadAction } from '@reduxjs/toolkit';
-import { productService, IProduct } from '../../service/productService';
+import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
+import { IProduct, productService } from '../../service/productService';
 
 export type { IProduct } from '../../service/productService';
 

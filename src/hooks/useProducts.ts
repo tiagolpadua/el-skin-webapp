@@ -1,7 +1,7 @@
 import { useCallback, useMemo } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import type { AppDispatch, RootState } from '../store';
-import { clearError, fetchProductById, fetchProducts } from '../store/slices/productsSlice';
+import { fetchProductById, fetchProducts } from '../store/slices/productsSlice';
 
 export const useProducts = () => {
   const dispatch = useDispatch<AppDispatch>();
