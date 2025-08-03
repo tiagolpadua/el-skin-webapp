@@ -1,7 +1,7 @@
 
 import { useCallback, useEffect, useState } from 'react';
 import { useCartContext } from '../../context/CartContext';
-import { useSearchContext } from '../../context/SearchContext';
+import { useSearch } from '../../hooks/useSearch';
 import { IProduct, productService } from '../../service/productService';
 import ProductCard from '../ProductCard/ProductCard';
 import './ProductGrid.css';
@@ -11,7 +11,7 @@ function ProductGrid() {
   const [products, setProducts] = useState<IProduct[]>([]);
   const [filteredProducts, setFilteredProducts] = useState<IProduct[]>([]);
   
-  const { search } = useSearchContext();
+  const { search } = useSearch();
   const { addItem } = useCartContext();
 
   useEffect(() => {

@@ -1,7 +1,7 @@
 import { faCartShopping, faSearch } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import React, { useState } from 'react';
-import { useSearchContext } from '../../context/SearchContext';
+import { useSearch } from '../../hooks/useSearch';
 import './Header.css';
 import CartModal from '../CartModal/CartModal';
 // import { useCartContext } from '../../context/CartContext';
@@ -16,7 +16,7 @@ const Logo = styled.div`
 `;
 
 function Header() {
-  const { search, setSearch } = useSearchContext();
+  const { search, setSearch } = useSearch();
   // const { items } = useCartContext();
   const [isCartModalOpen, setIsCartModalOpen] = useState(false);
   

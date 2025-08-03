@@ -28,14 +28,16 @@ jest.mock('../../service/productService', () => ({
   },
 }));
 
-// Mock do SearchContext para controlar o termo de busca
+// Mock do hook useSearch para controlar o termo de busca
 let mockSearchTerm = '';
 
 const mockAddItem = jest.fn();
 
-jest.mock('../../context/SearchContext', () => ({
-  useSearchContext: () => ({
+jest.mock('../../hooks/useSearch', () => ({
+  useSearch: () => ({
     search: mockSearchTerm,
+    setSearch: jest.fn(),
+    clearSearch: jest.fn(),
   }),
 }));
 
