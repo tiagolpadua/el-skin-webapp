@@ -1,12 +1,35 @@
 import { renderHook } from '@testing-library/react';
 import { useCart } from './useCart';
 import { act } from 'react';
+import { Provider } from 'react-redux';
+import { configureStore } from '@reduxjs/toolkit';
+import searchReducer from '../store/slices/searchSlice';
+import cartReducer from '../store/slices/cartSlice';
+import { ReactNode } from 'react';
+
+// Create a fresh store for each test
+const createTestStore = () => configureStore({
+  reducer: {
+    search: searchReducer,
+    cart: cartReducer,
+  },
+});
+
+const createWrapper = (store: ReturnType<typeof createTestStore>) => {
+  const TestWrapper = ({ children }: { children: ReactNode }) => (
+    <Provider store={store}>{children}</Provider>
+  );
+  TestWrapper.displayName = 'TestWrapper';
+  return TestWrapper;
+};
 
 it('deve inicializar corretamente o carrinho vazio', () => {
   // Arrange
+  const store = createTestStore();
+  const wrapper = createWrapper(store);
+  
   // Act
-  const { result } = renderHook(() => useCart());
-
+  const { result } = renderHook(() => useCart(), { wrapper });
 
   // Assert
   expect(result.current.items).toEqual([]);
@@ -16,7 +39,9 @@ it('deve inicializar corretamente o carrinho vazio', () => {
 
 it('deve adicionar um item ao carrinho', () => {
   // Arrange
-  const { result } = renderHook(() => useCart());
+  const store = createTestStore();
+  const wrapper = createWrapper(store);
+  const { result } = renderHook(() => useCart(), { wrapper });
 
   // Act
   const newItem = {
@@ -39,9 +64,11 @@ it('deve adicionar um item ao carrinho', () => {
   expect(result.current.totalPrice).toBe(99.99);
 });
 
-it('deve adicionar um item ao carrinho', () => {
+it('deve incrementar quantidade do item existente', () => {
   // Arrange
-  const { result } = renderHook(() => useCart());
+  const store = createTestStore();
+  const wrapper = createWrapper(store);
+  const { result } = renderHook(() => useCart(), { wrapper });
 
   // Act
   const newItem = {

@@ -26,11 +26,9 @@ function Carousel() {
   }, []);
 
   useEffect(() => {
-    console.log('iniciou o timer do carrousel');
     const timer = setInterval(() => nextItem(), 3000);
     return () => {
       clearInterval(timer);
-      console.log('limpou o timer do carrousel');
     };
   }, [items]);
 

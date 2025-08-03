@@ -1,6 +1,5 @@
 import { ThemeProvider } from 'styled-components';
 import { Provider } from 'react-redux';
-import { CartProvider } from './context/CartContext';
 import { store } from './store';
 import AppRouter from './routes';
 import { theme } from './styles/theme';
@@ -13,9 +12,7 @@ function App() {
       <Provider store={store}>
         <ThemeProvider theme={theme}>
           <GlobalStyles />
-          <CartProvider>
-            <AppRouter />
-          </CartProvider>
+          <AppRouter />
         </ThemeProvider>
       </Provider>
     </React.StrictMode>

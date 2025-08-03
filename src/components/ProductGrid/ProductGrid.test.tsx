@@ -41,9 +41,15 @@ jest.mock('../../hooks/useSearch', () => ({
   }),
 }));
 
-jest.mock('../../context/CartContext', () => ({
-  useCartContext: () => ({
-    addItem: mockAddItem
+jest.mock('../../hooks/useCart', () => ({
+  useCart: () => ({
+    addItem: mockAddItem,
+    items: [],
+    removeItem: jest.fn(),
+    updateQuantity: jest.fn(),
+    clearCart: jest.fn(),
+    getTotalItems: () => 0,
+    totalPrice: 0,
   }),
 }));
 

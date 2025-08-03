@@ -26,8 +26,6 @@ const ProductCard: React.FC<ProductCardProps> = ({
     return `R$ ${price.toFixed(2).replace('.', ',')}`;
   };
 
-  console.log('ProductCard rendered:', product.name);
-
   return (
     <StyledProductCard
       data-testid="product-card" 

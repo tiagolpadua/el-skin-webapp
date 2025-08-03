@@ -2,7 +2,7 @@ import { faMinus, faPlus, faTimes, faTrash } from '@fortawesome/free-solid-svg-i
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import React from 'react';
 import './CartModal.css';
-import { useCartContext } from '../../context/CartContext';
+import { useCart } from '../../hooks/useCart';
 
 interface CartModalProps {
   isOpen: boolean;
@@ -19,7 +19,7 @@ const CartModal: React.FC<CartModalProps> = ({
 }) => {
   if (!isOpen) return null;
 
-  const { items, updateQuantity, removeItem: removerProduto, totalPrice: totalPriceMemo } = useCartContext();
+  const { items, updateQuantity, removeItem: removerProduto, totalPrice: totalPriceMemo } = useCart();
 
   const handleBackdropClick = (e: React.MouseEvent) => {
     if (e.target === e.currentTarget) {
