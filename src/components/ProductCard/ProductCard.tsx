@@ -1,6 +1,6 @@
 import React from 'react';
 import './ProductCard.css';
-import { IProduct } from '../../service/productService';
+import { IProduct } from '../../store/slices/productsSlice';
 import styled from 'styled-components';
 
 interface ProductCardProps {

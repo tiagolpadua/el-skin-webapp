@@ -21,11 +21,15 @@ const mockProducts = [
   }
 ];
 
-// Mock dos serviços
-jest.mock('../../service/productService', () => ({
-  productService: {
-    getProducts: () => mockProducts,
-  },
+// Mock do useProducts hook
+jest.mock('../../hooks/useProducts', () => ({
+  useProducts: () => ({
+    products: mockProducts,
+    loading: false,
+    error: null,
+    loadProducts: jest.fn(),
+    getProductById: (id: string) => mockProducts.find(p => p.id === id),
+  }),
 }));
 
 // Mock do hook useSearch para controlar o termo de busca
