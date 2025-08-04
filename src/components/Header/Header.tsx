@@ -1,11 +1,11 @@
 import { faCartShopping, faSearch } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import React, { useState } from 'react';
-import { useSearchContext } from '../../context/SearchContext';
-import './Header.css';
 import CartModal from '../CartModal/CartModal';
+import './Header.css';
 // import { useCartContext } from '../../context/CartContext';
 import styled from 'styled-components';
+import { useSearch } from '../../hooks/useSearch';
 
 const Logo = styled.div`
   font-size: ${({ theme }) => theme.fontSize.base};
@@ -16,20 +16,19 @@ const Logo = styled.div`
 `;
 
 function Header() {
-  const { search, setSearch } = useSearchContext();
-  // const { items } = useCartContext();
   const [isCartModalOpen, setIsCartModalOpen] = useState(false);
+  const {term, setTerm} = useSearch();
   
   const handleCloseCart = () => {
     setIsCartModalOpen(false);
   };
 
   function handleOnChange(e: React.ChangeEvent<HTMLInputElement>) {
-    setSearch(e.target.value);
+    setTerm(e.target.value);
   }
 
   function onClickSearch(): void {
-    console.log(`Você pesquisou por: ${search}`);
+    console.log(`Você pesquisou por: ${term}`);
   }
 
   function handleOnClickCart() {

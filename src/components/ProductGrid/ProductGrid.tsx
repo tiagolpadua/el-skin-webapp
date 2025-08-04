@@ -1,7 +1,7 @@
 
 import { useCallback, useEffect, useState } from 'react';
 import { useCartContext } from '../../context/CartContext';
-import { useSearchContext } from '../../context/SearchContext';
+import { useSearch } from '../../hooks/useSearch';
 import { IProduct, productService } from '../../service/productService';
 import ProductCard from '../ProductCard/ProductCard';
 import './ProductGrid.css';
@@ -11,7 +11,8 @@ function ProductGrid() {
   const [products, setProducts] = useState<IProduct[]>([]);
   const [filteredProducts, setFilteredProducts] = useState<IProduct[]>([]);
   
-  const { search } = useSearchContext();
+  // const { search } = useSearchContext();
+  const {term} = useSearch();
   const { addItem } = useCartContext();
 
   useEffect(() => {
@@ -24,15 +25,15 @@ function ProductGrid() {
   }, []);
 
   useEffect(() => {
-    if (search) {
+    if (term) {
       setFilteredProducts(products.filter(product =>
-        product.name.toLowerCase().includes(search.toLowerCase()) ||
-        product.description.toLowerCase().includes(search.toLowerCase())
+        product.name.toLowerCase().includes(term.toLowerCase()) ||
+        product.description.toLowerCase().includes(term.toLowerCase())
       ));
     } else {
       setFilteredProducts([...products]);
     }
-  }, [search, products]);
+  }, [term, products]);
 
   const handleProductClick = (productId: string) => {
     console.log(`Produto clicado: ${productId}`);

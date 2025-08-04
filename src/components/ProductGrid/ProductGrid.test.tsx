@@ -33,9 +33,11 @@ let mockSearchTerm = '';
 
 const mockAddItem = jest.fn();
 
-jest.mock('../../context/SearchContext', () => ({
-  useSearchContext: () => ({
-    search: mockSearchTerm,
+jest.mock('../../hooks/useSearch', () => ({
+  useSearch: () => ({
+    term: mockSearchTerm,
+    setTerm: jest.fn(),
+    clearSearch: jest.fn(),
   }),
 }));
 
