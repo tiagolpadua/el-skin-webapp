@@ -8,7 +8,7 @@ export interface ICartItem {
   image: string;
 }
 
-interface CartState {
+export interface CartState {
   items: ICartItem[];
 }
 
