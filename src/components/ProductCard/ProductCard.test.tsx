@@ -1,6 +1,6 @@
 import '@testing-library/jest-dom';
 import { fireEvent, render, screen } from '@testing-library/react';
-import { IProduct } from '../../service/productService';
+import { IProduct } from '../../store/api/apiSlice';
 import ProductCard from './ProductCard';
 
 const product: IProduct = {

@@ -21,14 +21,12 @@ const mockProducts = [
   }
 ];
 
-// Mock do useProducts hook
-jest.mock('../../hooks/useProducts', () => ({
-  useProducts: () => ({
-    products: mockProducts,
-    loading: false,
+// Mock RTK Query hook
+jest.mock('../../store/api/apiSlice', () => ({
+  useGetProductsQuery: () => ({
+    data: mockProducts,
+    isLoading: false,
     error: null,
-    loadProducts: jest.fn(),
-    getProductById: (id: string) => mockProducts.find(p => p.id === id),
   }),
 }));
 
