@@ -2,6 +2,8 @@ import '@testing-library/jest-dom';
 import { act, render, screen } from '@testing-library/react';
 import ProductGrid from './ProductGrid';
 
+const mockAddItem = jest.fn();
+
 const mockProducts = [
   {
     id: '1',
@@ -31,8 +33,6 @@ jest.mock('../../service/productService', () => ({
 // Mock do SearchContext para controlar o termo de busca
 let mockSearchTerm = '';
 
-const mockAddItem = jest.fn();
-
 jest.mock('../../hooks/useSearch', () => ({
   useSearch: () => ({
     term: mockSearchTerm,
@@ -41,11 +41,22 @@ jest.mock('../../hooks/useSearch', () => ({
   }),
 }));
 
-jest.mock('../../context/CartContext', () => ({
-  useCartContext: () => ({
-    addItem: mockAddItem
-  }),
+
+jest.mock('../../hooks/useCart', () => ({
+  addItem: jest.fn(),
+  items: [],
+  removeItem: jest.fn(),
+  updateQuantity: jest.fn(),
+  clearCart: jest.fn(),
+  getTotalItems: () => 0,
+  totalPrice: 0,
 }));
+
+// jest.mock('../../context/CartContext', () => ({
+//   useCartContext: () => ({
+//     addItem: mockAddItem
+//   }),
+// }));
 
 const renderWithAct = async () => {
   let component;

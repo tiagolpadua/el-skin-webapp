@@ -1,10 +1,10 @@
 
 import { useCallback, useEffect, useState } from 'react';
-import { useCartContext } from '../../context/CartContext';
 import { useSearch } from '../../hooks/useSearch';
 import { IProduct, productService } from '../../service/productService';
 import ProductCard from '../ProductCard/ProductCard';
 import './ProductGrid.css';
+import { useCart } from '../../hooks/useCart';
 
 function ProductGrid() {
   const title = 'nossos queridinhos estão aqui';
@@ -13,7 +13,7 @@ function ProductGrid() {
   
   // const { search } = useSearchContext();
   const {term} = useSearch();
-  const { addItem } = useCartContext();
+  const { addItem } = useCart();
 
   useEffect(() => {
     const fetchProducts = async () => {
