@@ -1,28 +1,28 @@
 
 import { useCallback, useEffect, useState } from 'react';
+import { useCart } from '../../hooks/useCart';
+import { useProducts } from '../../hooks/useProducts';
 import { useSearch } from '../../hooks/useSearch';
-import { IProduct, productService } from '../../service/productService';
+import { IProduct } from '../../service/productService';
 import ProductCard from '../ProductCard/ProductCard';
 import './ProductGrid.css';
-import { useCart } from '../../hooks/useCart';
 
 function ProductGrid() {
   const title = 'nossos queridinhos estão aqui';
-  const [products, setProducts] = useState<IProduct[]>([]);
+  // const [products, setProducts] = useState<IProduct[]>([]);
   const [filteredProducts, setFilteredProducts] = useState<IProduct[]>([]);
   
   // const { search } = useSearchContext();
   const {term} = useSearch();
   const { addItem } = useCart();
 
-  useEffect(() => {
-    const fetchProducts = async () => {
-      const products = await productService.getProducts();
-      setProducts(products);
-    };
+  const { products, loadProducts } = useProducts();
 
-    fetchProducts();
-  }, []);
+  useEffect(() => {
+    if (products.length === 0) {
+      loadProducts();
+    }
+  }, [products.length, loadProducts]);
 
   useEffect(() => {
     if (term) {
