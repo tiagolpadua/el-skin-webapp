@@ -43,7 +43,7 @@ test('deve acionar o método onProductClick quando o produto for clicado', () =>
   const card = screen.getByTestId('product-card');
   fireEvent.click(card);
 
-  expect(handleProductClick).toBeCalledWith('1');
+  expect(handleProductClick).toHaveBeenCalledWith('1');
   expect(handleProductClick).toHaveBeenCalledTimes(1);
 });
 
@@ -58,6 +58,6 @@ test('deve acionar o método onBuyClick quando o botão comprar for clicado', ()
   const card = screen.getByTestId('buy-button');
   fireEvent.click(card);
 
-  expect(handleBuyClick).toBeCalledWith('1', expect.any(Object));
+  expect(handleBuyClick).toHaveBeenCalledWith('1', expect.any(Object));
   expect(handleBuyClick).toHaveBeenCalledTimes(1);
 });

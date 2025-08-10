@@ -1,4 +1,4 @@
-function NotFound() {
+export default function NotFound() {
   return (
     <section>
       <h3 className="titulo">Página não encontrada</h3>
@@ -6,5 +6,3 @@ function NotFound() {
     </section>
   );
 }
-
-export default NotFound;

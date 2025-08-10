@@ -1,3 +1,5 @@
+'use client';
+
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faAngleLeft, faAngleRight } from '@fortawesome/free-solid-svg-icons';
 import styles from './Carousel.module.css';
