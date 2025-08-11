@@ -1,8 +1,8 @@
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faAngleLeft, faAngleRight } from '@fortawesome/free-solid-svg-icons';
-import styles from './Carousel.module.css';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { useEffect, useState } from 'react';
-import { carouselService } from '../../service/carouselService';
+import { useGetCarouselItemsQuery } from '../../store/api/apiSlice';
+import styles from './Carousel.module.css';
 
 interface ICarouselItem {
   subtitle: string;
@@ -12,18 +12,9 @@ interface ICarouselItem {
 }
 
 function Carousel() {
-  const [items, setItems] = useState<ICarouselItem[]>([]);
-
   const [idxItemAtual, setIdxItemAtual] = useState(0);
 
-  useEffect(() => {
-    async function fetchItems() {
-      const newItems = await carouselService.getCarouselItems();
-      setItems(newItems);
-    }
-
-    fetchItems();
-  }, []);
+  const { data: itemsCarousel = [], isLoading: isLoadingCarousel, error: errorCarousel } = useGetCarouselItemsQuery();
 
   useEffect(() => {
     console.log('iniciou o timer do carrousel');
@@ -32,29 +23,32 @@ function Carousel() {
       clearInterval(timer);
       console.log('limpou o timer do carrousel');
     };
-  }, [items]);
+  }, [itemsCarousel]);
 
   function previousItem() {
-    if (items.length === 0) {
+    if (itemsCarousel.length === 0) {
       return;
     }
-    setIdxItemAtual((prevIdx) => (prevIdx === 0 ? items.length - 1 : prevIdx - 1));
+    setIdxItemAtual((prevIdx) => (prevIdx === 0 ? itemsCarousel.length - 1 : prevIdx - 1));
   }
 
   function nextItem() {
-    if (items.length === 0) {
+    if (itemsCarousel.length === 0) {
       return;
     }
-    setIdxItemAtual((prevIdx) => (prevIdx === items.length - 1 ? 0 : prevIdx + 1));
+    setIdxItemAtual((prevIdx) => (prevIdx === itemsCarousel.length - 1 ? 0 : prevIdx + 1));
   }
 
   return (
     <>
-      {items.length === 0 && <h6>Carregando...</h6>}
-      {items.length > 0 && <section 
+      {isLoadingCarousel && <h6>Carregando...</h6>}
+
+      {errorCarousel && <h6>Ocorreu um erro: {JSON.stringify(errorCarousel)}</h6>}
+
+      {!isLoadingCarousel && !errorCarousel && <section 
         className={styles.carouselSection}
         style={{ 
-          backgroundImage: `url(${items[idxItemAtual].backgroundImage})`,
+          backgroundImage: `url(${itemsCarousel[idxItemAtual].backgroundImage})`,
         }}
       >
         <div
@@ -66,9 +60,9 @@ function Carousel() {
             </button>
           
             <div className={styles.carouselText}>
-              <span className={styles.carouselSubtitle}>{items[idxItemAtual].subtitle}</span>
-              <h1 className={styles.carouselTitle}>{items[idxItemAtual].title}</h1>
-              <p className={styles.carouselDescription}>{items[idxItemAtual].description}</p>
+              <span className={styles.carouselSubtitle}>{itemsCarousel[idxItemAtual].subtitle}</span>
+              <h1 className={styles.carouselTitle}>{itemsCarousel[idxItemAtual].title}</h1>
+              <p className={styles.carouselDescription}>{itemsCarousel[idxItemAtual].description}</p>
               <button 
                 className={styles.carouselCtaButton}>
               comprar agora
