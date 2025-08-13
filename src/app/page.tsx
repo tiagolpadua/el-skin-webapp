@@ -1,3 +1,11 @@
+"use client";
+
+import Carousel from "../components/Carousel/Carousel"
+import ProductGrid from "../components/ProductGrid/ProductGrid"
+
 export default function Home() {
-  return <h1>Minha nova home!</h1>
+  return <>
+      <Carousel />
+      <ProductGrid />
+    </>;
 }
